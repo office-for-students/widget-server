@@ -18,7 +18,8 @@ steps:
       sed -i 's|{{api_domain}}|'$apiHost'|g' ./public/widget.js
       sed -i 's|{{api_key}}|'$apiKey'|g' ./public/widget.js
       cssStyles=$(<./public/widget.css)
-      sed -i 's|{{styles}}|'$cssStyles'|g' ./public/widget.js
+      cssStyles=${cssStyles//[$'\t\r\n']}
+      sed -i 's|{{styles}}|'"$cssStyles"'|g' ./public/widget.js
     env:
       domainName: $(rootDomain)
       apiHost: $(apiHostName)
