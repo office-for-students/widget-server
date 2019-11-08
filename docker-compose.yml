@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  web:
+    environment:
+      WIDGETAPIKEY: "${WIDGETAPIKEY}"
+      WIDGETAPIHOST: "${WIDGETAPIHOST}"
+      ROOT_DOMAIN: "${ROOT_DOMAIN}"
+    build: .
+    command: bash -c "npm start"
+    volumes:
+      - .:/code
+    ports:
+      - "8001:80"
