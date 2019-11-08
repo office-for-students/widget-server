@@ -21,8 +21,7 @@ The purpose of this app is to provide a light weight server to serve the IFrame 
 
 ### Tech stack
 
-This application is based on the Wagtail CMS.
-It utilises:
+This project utilises:
 - NodeJS framework
 - Express server
 
