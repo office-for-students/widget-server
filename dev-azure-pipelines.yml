@@ -14,9 +14,9 @@ variables:
 
 steps:
   - script: |
-      sed -i 's/{{domain_name}}/$domainName/g' widget.js
-      sed -i 's/{{api_domain}}/$apiHost/g' widget.js
-      sed -i 's/{{api_key}}/$apiKey/g' widget.js
+      sed -i 's/{{domain_name}}/$domainName/g' ./public/widget.js
+      sed -i 's/{{api_domain}}/$apiHost/g' ./public/widget.js
+      sed -i 's/{{api_key}}/$apiKey/g' ./public/widget.js
     env:
       domainName: $(rootDomain)
       apiHost: $(apiHostName)
