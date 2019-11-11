@@ -60,6 +60,7 @@
     margin-bottom: 38px;
     height: 30px;
     display: block;
+    width: unset;
 }
 
 .kis-widget.horizontal .widget-cta-block .logo {
