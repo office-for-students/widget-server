@@ -15,66 +15,82 @@ app.use(compression());
 app.use(helmet());
 
 app.get('/widget/:uniId/:courseId/small', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/widget/:uniId/:courseId/small/:optional1', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/widget/:uniId/:courseId/small/:optional1/:optional2', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/widget/:uniId/:courseId/:optional1/small/', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/widget/:uniId/:courseId/:optional1/small/:optional2', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/widget/:uniId/:courseId/:optional1/small/:optional2/:optional3', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/widget/embed-script', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.sendFile('public/widget.js', { root: __dirname });
 });
 
 app.get('/widget/embed-script.js', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.sendFile('public/widget.js', { root: __dirname });
 });
 
 app.get('/Widget/:uniId/:courseId/small', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/Widget/:uniId/:courseId/small/:optional1', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/Widget/:uniId/:courseId/small/:optional1/:optional2', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/Widget/:uniId/:courseId/:optional1/small/', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/Widget/:uniId/:courseId/:optional1/small/:optional2', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/Widget/:uniId/:courseId/:optional1/small/:optional2/:optional3', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.render('iframe', processParams(req.params));
 });
 
 app.get('/Widget/embed-script', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.sendFile('public/widget.js', { root: __dirname });
 });
 
 app.get('/Widget/embed-script.js', (req, res) => {
+    res.removeHeader('X-Frame-Options');
     res.sendFile('public/widget.js', { root: __dirname });
 });
 
