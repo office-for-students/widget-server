@@ -1,3 +1,24 @@
+/* Reset tag style to prevent bleed over */
+.kis-widget html, .kis-widget body, .kis-widget div, .kis-widget span,
+.kis-widget h1, .kis-widget h2, .kis-widget h3, .kis-widget p,
+.kis-widget a, .kis-widget img,
+.kis-widget small, .kis-widget strong,
+.kis-widget b {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-weight: normal;
+    text-transform: none;
+    box-sizing: initial;
+    line-height: initial;
+}
+.kis-widget body {
+    line-height: 1;
+}
+
+/* Widget styling */
 .widget-body {
     margin: 0px;
 }
@@ -6,6 +27,8 @@
     font-family: Nunito Sans;
     border: 2px solid #4EA27D;
     display: flex;
+    text-align: initial !important;
+    box-sizing: initial;
 }
 
 .kis-widget .widget-lead {
