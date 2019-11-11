@@ -459,7 +459,7 @@ DataWidget.prototype = {
 
     carousel: function() {
         var i;
-        var slides = document.getElementsByClassName("lead-slide");
+        var slides = this.targetDiv.getElementsByClassName("lead-slide");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
