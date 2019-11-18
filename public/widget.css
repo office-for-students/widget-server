@@ -68,6 +68,7 @@
 }
 
 .kis-widget .widget-cta-block .cta {
+    position: relative;
     background-color: white;
     border-radius: 60px;
     color: #308282;
@@ -75,13 +76,17 @@
     line-height: 17px;
     text-align: center;
     width: 100%;
-    padding-top: 9px;
-    padding-bottom: 9px;
 }
 
 .kis-widget .widget-cta-block .cta a {
+    position: relative;
     color: #308282;
     text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 9px;
+    padding-bottom: 9px;
 }
 
 .kis-widget .widget-cta-block h1 {
