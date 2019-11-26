@@ -38,6 +38,12 @@
     color: #308282;
 }
 
+.kis-widget.vertical .widget-lead .intro {
+    font-size: 15px;
+    line-height: 20px;
+    margin: 0px;
+}
+
 .kis-widget .widget-lead .intro {
     font-size: calc(8px + (90 - 8) * ((100vw - 400px) / (1600 - 400)));
     line-height: calc(10px + (90 - 10) * ((100vw - 400px) / (1600 - 400)));
@@ -91,6 +97,19 @@
     font-weight: normal;
     margin: 0px;
     line-height: 1em;
+}
+
+.kis-widget.kis-widget.vertical .widget-lead .title {
+    font-size: 48px;
+    font-weight: normal;
+    line-height: 58px;
+    margin: 0;
+}
+
+.kis-widget.vertical .widget-lead .course {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 0px;
 }
 
 .kis-widget .widget-lead .title {
