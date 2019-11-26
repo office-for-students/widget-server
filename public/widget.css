@@ -39,8 +39,8 @@
 }
 
 .kis-widget .widget-lead .intro {
-    font-size: calc(8px + (90 - 8) * ((100vw - 400px) / (1600 - 400)));
-    line-height: calc(10px + (90 - 10) * ((100vw - 400px) / (1600 - 400)));
+    font-size: 15px;
+    line-height: 20px;
     margin: 0px;
 }
 
@@ -94,15 +94,15 @@
 }
 
 .kis-widget .widget-lead .title {
-    font-size: calc(20px + (150 - 20) * ((100vw - 400px) / (1600 - 400)));
+    font-size: 48px;
     font-weight: normal;
-    line-height: calc(20px + (150 - 20) * ((100vw - 400px) / (1600 - 400)));
+    line-height: 57px;
     margin: 0;
 }
 
 .kis-widget .widget-lead .course {
-    font-size: calc(6px + (35 - 6) * ((100vw - 400px) / (1600 - 400)));
-    line-height: calc(6px + (35 - 6) * ((100vw - 400px) / (1600 - 400)));
+    font-size: 11px;
+    line-height: 13px;
     margin: 0px;
 }
 
@@ -118,13 +118,7 @@
     height: 146px;
 }
 
-.kis-widget.vertical.responsive{
-    height: calc(100% - 4px);
-    width: calc(100% - 4px);
-    max-height: 500px;
-}
-
-.kis-widget.horizontal.responsive {
+.kis-widget.vertical.responsive, .kis-widget.horizontal.responsive {
     height: calc(100% - 4px);
     width: calc(100% - 4px);
     max-height: 500px;
