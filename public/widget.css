@@ -15,8 +15,6 @@
     line-height: initial;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-}
-.kis-widget div.course-details{
     position: static;
 }
 .kis-widget body {
