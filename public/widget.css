@@ -152,9 +152,6 @@
     width : auto;
     word-spacing : normal;
     z-index : auto;
-    /* basic modern patch */
-    all: initial;
-    all: unset;
 }
 .kis-widget body {
     line-height: 1;
@@ -185,8 +182,8 @@
 }
 
 .kis-widget .widget-lead .intro {
-    font-size: calc(8px + (16 - 8) * ((100vw - 300px) / (1920 - 300)));
-    line-height: calc(10px + (18 - 10) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(10px + (20 - 10) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(10px + (20 - 10) * ((100vw - 300px) / (1920 - 300)));
     margin: 0px;
 }
 
@@ -255,15 +252,15 @@
 }
 
 .kis-widget .widget-lead .title {
-    font-size: calc(20px + (50 - 20) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(20px + (56 - 20) * ((100vw - 300px) / (1920 - 300)));
     font-weight: normal;
-    line-height: calc(22px + (52 - 22) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(20px + (56 - 20) * ((100vw - 300px) / (1920 - 300)));
     margin: 0;
 }
 
 .kis-widget .widget-lead .course {
-    font-size: calc(6px + (12 - 6) * ((100vw - 300px) / (1920 - 300)));
-    line-height: calc(8px + (14 - 8) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(8px + (16 - 6) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(8px + (16 - 8) * ((100vw - 300px) / (1920 - 300)));
     margin: 0px;
 }
 
