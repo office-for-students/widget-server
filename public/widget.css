@@ -232,7 +232,7 @@
     position: relative;
 }
 
-.kis-widget .widget-cta-block h1 {
+.kis-widget .widget-cta-block span {
     font-weight: normal;
     margin: 0px;
     line-height: 1em;

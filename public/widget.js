@@ -294,7 +294,7 @@ DataWidget.prototype = {
     },
 
     createTitleNode: function(titleText) {
-        var titleNode = document.createElement('h1');
+        var titleNode = document.createElement('p');
         titleNode.classList.add('title');
         var title = document.createTextNode(titleText);
         titleNode.appendChild(title);
