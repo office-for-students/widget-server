@@ -4,18 +4,19 @@
 .kis-widget a, .kis-widget img,
 .kis-widget small, .kis-widget strong,
 .kis-widget b {
+    background-color: transparent;
+    border: 0;
+    box-shadow: none !important;
+    box-sizing: initial;
+    font-size: 100%;
+    font-weight: normal;
+    line-height: initial;
     margin: 0;
     padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    font-weight: normal;
-    text-transform: none;
-    box-sizing: initial;
-    line-height: initial;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
     position: static;
+    vertical-align: baseline;
+    text-transform: none;
+    -webkit-box-shadow: none !important;
 }
 .kis-widget body {
     line-height: 1;
@@ -39,15 +40,9 @@
     color: #308282;
 }
 
-.kis-widget.vertical .widget-lead .intro {
-    font-size: 15px;
-    line-height: 20px;
-    margin: 0px;
-}
-
 .kis-widget .widget-lead .intro {
-    font-size: calc(8px + (16 - 8) * ((100vw - 300px) / (1920 - 300)));
-    line-height: calc(10px + (18 - 10) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(10px + (20 - 10) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(12px + (22 - 10) * ((100vw - 300px) / (1920 - 300)));
     margin: 0px;
 }
 
@@ -57,6 +52,7 @@
 }
 
 .kis-widget .widget-cta-block .cta-lead {
+    display: block;
     font-size: 13px;
     line-height: 16px;
     color: white;
@@ -79,6 +75,7 @@
     background-color: white;
     border-radius: 60px;
     color: #308282;
+    display: block;
     font-size: 15px;
     line-height: 17px;
     text-align: center;
@@ -86,43 +83,30 @@
 }
 
 .kis-widget .widget-cta-block .cta a {
-    position: relative;
     color: #308282;
     text-decoration: none;
     display: block;
     padding-top: 9px;
     padding-bottom: 9px;
+    position: relative;
 }
 
-.kis-widget .widget-cta-block h1 {
+.kis-widget .widget-cta-block span {
     font-weight: normal;
     margin: 0px;
     line-height: 1em;
 }
 
-.kis-widget.kis-widget.vertical .widget-lead .title {
-    font-size: 48px;
-    font-weight: normal;
-    line-height: 58px;
-    margin: 0;
-}
-
-.kis-widget.vertical .widget-lead .course {
-    font-size: 11px;
-    line-height: 13px;
-    margin: 0px;
-}
-
 .kis-widget .widget-lead .title {
-    font-size: calc(20px + (50 - 20) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(20px + (56 - 20) * ((100vw - 300px) / (1920 - 300)));
     font-weight: normal;
-    line-height: calc(22px + (52 - 22) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(22px + (58 - 22) * ((100vw - 300px) / (1920 - 300)));
     margin: 0;
 }
 
 .kis-widget .widget-lead .course {
-    font-size: calc(6px + (12 - 6) * ((100vw - 300px) / (1920 - 300)));
-    line-height: calc(8px + (14 - 8) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(8px + (15 - 8) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(10px + (17 - 10) * ((100vw - 300px) / (1920 - 300)));
     margin: 0px;
 }
 
