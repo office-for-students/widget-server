@@ -11,17 +11,9 @@ var CONTENT = {
         'en-gb': 'in work or doing further study six months after finishing.',
         'cy-gb':"mewn gwaith neu'n astudio ymhellach o fewn chwe mis ar ôl gorffen. "
     },
-    'ctaLead1': {
-        'en-gb': 'For ',
-        'cy-gb': 'Am'
-    },
-    'ctaLead2': {
-        'en-gb': 'more',
-        'cy-gb': 'fwy'
-    },
-    'ctaLead3': {
-        'en-gb': ' official course information visit.',
-        'cy-gb': 'o wybodaeth swyddogol am y cwrs, ewch i'
+    'ctaLead': {
+        'en-gb': 'For more official course information visit',
+        'cy-gb': 'Amfwyo wybodaeth swyddogol am y cwrs, ewch i'
     },
     'logo': {
         'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
@@ -39,17 +31,9 @@ var CONTENT = {
         'en-gb': 'To see official information about this course and others visit Discover Uni.',
         'cy-gb': 'I weld gwybodaeth swyddogol am y cwrs hwn a chyrsiau eraill, ewch i Darganfod y Brifysgol.'
     },
-    'noDataCtaLead1': {
-        'en-gb': 'Make an ',
-        'cy-gb': 'Dewis '
-    },
-    'noDataCtaLead2': {
-        'en-gb': 'informed',
-        'cy-gb': 'yn'
-    },
-    'noDataCtaLead3': {
-        'en-gb': ' choice.',
-        'cy-gb': 'ddeallus.'
+    'noDataCtaLead': {
+        'en-gb': 'Make an informed choice',
+        'cy-gb': 'Dewis yn deallus'
     },
     'noDataCta': {
         'en-gb': 'See course info',
@@ -310,7 +294,7 @@ DataWidget.prototype = {
     },
 
     createTitleNode: function(titleText) {
-        var titleNode = document.createElement('h1');
+        var titleNode = document.createElement('p');
         titleNode.classList.add('title');
         var title = document.createTextNode(titleText);
         titleNode.appendChild(title);
@@ -417,24 +401,12 @@ DataWidget.prototype = {
         var ctaBlockNode = document.createElement('div');
         ctaBlockNode.classList.add('widget-cta-block');
 
-        var headingNode = document.createElement('h1');
-        var leadNode1 = document.createElement("span");
-        leadNode1.classList.add('cta-lead');
-        var lead1 = document.createTextNode(CONTENT.ctaLead1[this.language]);
-        var leadNode2 = document.createElement("strong");
-        leadNode2.classList.add('cta-lead');
-        var lead2 = document.createTextNode(CONTENT.ctaLead2[this.language]);
-        var leadNode3 = document.createElement("span");
-        leadNode3.classList.add('cta-lead');
-        var lead3 = document.createTextNode(CONTENT.ctaLead3[this.language]);
-        leadNode1.appendChild(lead1);
-        leadNode2.appendChild(lead2);
-        leadNode3.appendChild(lead3);
-        headingNode.appendChild(leadNode1);
-        headingNode.appendChild(leadNode2);
-        headingNode.appendChild(leadNode3);
+        var leadNode = document.createElement("span");
+        leadNode.classList.add('cta-lead');
+        var lead = document.createTextNode(CONTENT.ctaLead[this.language]);
+        leadNode.appendChild(lead);
 
-        ctaBlockNode.appendChild(headingNode);
+        ctaBlockNode.appendChild(leadNode);
 
         var logoNode = document.createElement('img');
         logoNode.classList.add('logo');
@@ -503,24 +475,12 @@ NoDataWidget.prototype = {
         var ctaBlockNode = document.createElement('div');
         ctaBlockNode.classList.add('widget-cta-block');
 
-        var headingNode = document.createElement('h1');
-        var leadNode1 = document.createElement("span");
-        leadNode1.classList.add('cta-lead');
-        var lead1 = document.createTextNode(CONTENT.noDataCtaLead1[this.language]);
-        var leadNode2 = document.createElement("strong");
-        leadNode2.classList.add('cta-lead');
-        var lead2 = document.createTextNode(CONTENT.noDataCtaLead2[this.language]);
-        var leadNode3 = document.createElement("span");
-        leadNode3.classList.add('cta-lead');
-        var lead3 = document.createTextNode(CONTENT.noDataCtaLead3[this.language]);
-        leadNode1.appendChild(lead1);
-        leadNode2.appendChild(lead2);
-        leadNode3.appendChild(lead3);
-        headingNode.appendChild(leadNode1);
-        headingNode.appendChild(leadNode2);
-        headingNode.appendChild(leadNode3);
+        var leadNode = document.createElement("span");
+        leadNode.classList.add('cta-lead');
+        var lead = document.createTextNode(CONTENT.noDataCtaLead[this.language]);
+        leadNode.appendChild(lead);
 
-        ctaBlockNode.appendChild(headingNode);
+        ctaBlockNode.appendChild(leadNode);
 
         var logoNode = document.createElement('img');
         logoNode.classList.add('logo');
