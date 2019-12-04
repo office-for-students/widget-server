@@ -144,7 +144,7 @@
 
 .kis-widget.vertical .widget-lead {
     position: relative;
-    flex: 1;
+    flex: 1 1 auto;
 }
 
 .kis-widget.horizontal .widget-lead {
