@@ -1,6 +1,6 @@
 {
   "name": "discoveruni_widget",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Hosting for DiscoverUni widget",
   "author": "Matt Nicks",
   "main": "server.js",

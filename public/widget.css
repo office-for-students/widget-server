@@ -41,8 +41,8 @@
 }
 
 .kis-widget .widget-lead .intro {
-    font-size: calc(10px + (20 - 10) * ((100vw - 300px) / (1920 - 300)));
-    line-height: calc(12px + (22 - 10) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(10px + (18 - 10) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(11px + (19 - 11) * ((100vw - 300px) / (1920 - 300)));
     margin: 0px;
 }
 
@@ -100,13 +100,13 @@
 .kis-widget .widget-lead .title {
     font-size: calc(20px + (56 - 20) * ((100vw - 300px) / (1920 - 300)));
     font-weight: normal;
-    line-height: calc(22px + (58 - 22) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(21px + (57 - 21) * ((100vw - 300px) / (1920 - 300)));
     margin: 0;
 }
 
 .kis-widget .widget-lead .course {
     font-size: calc(8px + (15 - 8) * ((100vw - 300px) / (1920 - 300)));
-    line-height: calc(10px + (17 - 10) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(9px + (16 - 9) * ((100vw - 300px) / (1920 - 300)));
     margin: 0px;
 }
 
