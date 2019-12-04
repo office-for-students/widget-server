@@ -123,14 +123,12 @@
 }
 
 .kis-widget.vertical.responsive{
-    display: block;
     height: calc(100% - 4px);
     width: calc(100% - 4px);
     max-height: 500px;
 }
 
 .kis-widget.horizontal.responsive {
-    display: block;
     height: calc(100% - 4px);
     width: calc(100% - 4px);
     max-height: 500px;
