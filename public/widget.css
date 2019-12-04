@@ -105,8 +105,8 @@
 }
 
 .kis-widget .widget-lead .course {
-    font-size: calc(8px + (15 - 8) * ((100vw - 300px) / (1920 - 300)));
-    line-height: calc(9px + (16 - 9) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(8px + (14 - 8) * ((100vw - 300px) / (1920 - 300)));
+    line-height: calc(9px + (15 - 9) * ((100vw - 300px) / (1920 - 300)));
     margin: 0px;
 }
 
