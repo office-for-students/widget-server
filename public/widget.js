@@ -476,20 +476,20 @@ NoDataWidget.prototype = {
         ctaBlockNode.classList.add('widget-cta-block');
 
         var leadNode = document.createElement("span");
-        leadNode.classList.add('cta-lead');
+        leadNode.classList.add('widget-cta-lead');
         var lead = document.createTextNode(CONTENT.noDataCtaLead[this.language]);
         leadNode.appendChild(lead);
 
         ctaBlockNode.appendChild(leadNode);
 
         var logoNode = document.createElement('img');
-        logoNode.classList.add('logo');
+        logoNode.classList.add('widget-cta-logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
         logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
-        ctaWrapperNode.classList.add('cta');
+        ctaWrapperNode.classList.add('widget-cta-button');
         var ctaNode = document.createElement('a');
         ctaNode.setAttribute('target', '_blank');
         ctaNode.href = this.generateLink();
