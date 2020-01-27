@@ -149,7 +149,7 @@
 
 .kis-widget.horizontal .widget-lead {
     width: 380px;
-    flex: 1 1 0;
+    flex: 1 1 0%;
     padding: 27px 17px 17px;
     position: relative;
 }
@@ -179,7 +179,7 @@
 
 .kis-widget.horizontal.no-data .widget-cta-block {
     width: 160px;
-    flex: 1 1 0;
+    flex: 1 1 0%;
     padding: 15px 11px 20px 19px;
 }
 
