@@ -86,12 +86,22 @@ app.get('/Widget/:uniId/:courseId/:optional1/small/:optional2/:optional3', (req,
 
 app.get('/Widget/embed-script', (req, res) => {
     res.removeHeader('X-Frame-Options');
-    res.sendFile('public/widget.js', { root: __dirname });
+    res.sendFile('public/widget.js', {
+        root: __dirname,
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+    });
 });
 
 app.get('/Widget/embed-script.js', (req, res) => {
     res.removeHeader('X-Frame-Options');
-    res.sendFile('public/widget.js', { root: __dirname });
+    res.sendFile('public/widget.js', {
+        root: __dirname,
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+    });
 });
 
 function processParams(params) {
