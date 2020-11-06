@@ -8,7 +8,7 @@ var CONTENT = {
         'cy-gb': 'cyfran y myfyrwyr sydd yn cytuno bod staff yn dda am esbonio pethau.'
     },
     'workIntro': {
-        'en-gb': 'in work or doing further study six months after finishing.',
+        'en-gb': 'in work or doing further study 15 months after finishing.',
         'cy-gb':"mewn gwaith neu'n astudio ymhellach o fewn chwe mis ar ôl gorffen. "
     },
     'ctaLead': {
