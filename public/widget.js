@@ -168,7 +168,7 @@ DiscoverUniWidget.prototype = {
         generalFontNode.href = "https://fonts.googleapis.com/css?family=Nunito+Sans:regular,bold&display=swap";
         generalFontNode.rel = "stylesheet";
         generalFontNode.type = "text/css";
-        styling = "{% styles %}";
+        styling = "{{styles}}";
         var stylingNode = document.createElement('style');
         var stylingTextNode = document.createTextNode(styling);
         stylingNode.appendChild(stylingTextNode);
