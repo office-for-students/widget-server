@@ -8,12 +8,20 @@ var CONTENT = {
         'cy-gb': 'cyfran y myfyrwyr sydd yn cytuno bod staff yn dda am esbonio pethau.'
     },
     'workIntro': {
-        'en-gb': 'in work or doing further study six months after finishing.',
-        'cy-gb':"mewn gwaith neu'n astudio ymhellach o fewn chwe mis ar ôl gorffen. "
+        'en-gb': 'in work or doing further study 15 months after the course.',
+        'cy-gb': "yn symud ymlaen i weithio ac/neu astudio o fewn 15 mis ar ôl y cwrs"
     },
-    'ctaLead': {
-        'en-gb': 'For more official course information visit',
-        'cy-gb': 'Amfwyo wybodaeth swyddogol am y cwrs, ewch i'
+    'ctaLead1': {
+        'en-gb': 'For ',
+        'cy-gb': 'Am '
+    },
+    'ctaLead2': {
+        'en-gb': 'more',
+        'cy-gb': 'fwy'
+    },
+    'ctaLead3': {
+        'en-gb': ' official course information visit.',
+        'cy-gb': ' o wybodaeth swyddogol am y cwrs, ewch i'
     },
     'logo': {
         'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
@@ -25,15 +33,23 @@ var CONTENT = {
     },
     'cta': {
         'en-gb': 'See course data',
-        'cy-gb':"Gweld data'r cwrs"
+        'cy-gb': "Gweld data'r cwrs"
     },
     'noDataIntro': {
         'en-gb': 'To see official information about this course and others visit Discover Uni.',
         'cy-gb': 'I weld gwybodaeth swyddogol am y cwrs hwn a chyrsiau eraill, ewch i Darganfod y Brifysgol.'
     },
-    'noDataCtaLead': {
-        'en-gb': 'Make an informed choice',
-        'cy-gb': 'Dewis yn deallus'
+    'noDataCtaLead1': {
+        'en-gb': 'Make an ',
+        'cy-gb': 'Dewis '
+    },
+    'noDataCtaLead2': {
+        'en-gb': 'informed',
+        'cy-gb': 'yn'
+    },
+    'noDataCtaLead3': {
+        'en-gb': ' choice.',
+        'cy-gb': ' ddeallus.'
     },
     'noDataCta': {
         'en-gb': 'See course info',
@@ -65,39 +81,40 @@ var CONTENT = {
     },
     'dataFor': {
         'en-gb': 'Data for: ',
-        'cy-gb': 'Data ar gyfer:'
+        'cy-gb': 'Data ar gyfer: '
     },
     'dataForAggregated': {
         'en-gb': 'Data for courses in ',
-        'cy-gb': 'Data ar gyfer cyrsiau'
+        'cy-gb': 'Data ar gyfer cyrsiau '
     },
     'at': {
         'en-gb': ' at ',
-        'cy-gb': 'yn'
+        'cy-gb': ' yn '
     }
-};
+}
+
 
 var MODES = {
     'fulltime': 1,
     'parttime': 2,
-};
+}
 
 var MODE_KEYS = {
     'fulltime': 'FullTime',
     'parttime': 'PartTime',
-};
+}
 
 var LANGUAGE_KEYS = {
     'en-gb': 'english',
     'cy-gb': 'welsh'
-};
+}
 
 var MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH = 400;
 
 var  DiscoverUniWidget = function(targetDiv) {
     this.targetDiv = targetDiv;
     this.setup();
-};
+}
 
 DiscoverUniWidget.prototype = {
     setup: function() {
@@ -151,7 +168,7 @@ DiscoverUniWidget.prototype = {
         generalFontNode.href = "https://fonts.googleapis.com/css?family=Nunito+Sans:regular,bold&display=swap";
         generalFontNode.rel = "stylesheet";
         generalFontNode.type = "text/css";
-        var styling = '{{styles}}';
+        styling = "{{styles}}";
         var stylingNode = document.createElement('style');
         var stylingTextNode = document.createTextNode(styling);
         stylingNode.appendChild(stylingTextNode);
@@ -177,22 +194,22 @@ DiscoverUniWidget.prototype = {
         xhttp.send();
     },
 
-
     renderWidget: function(status, response) {
         if (status === 200) {
             var courseData = JSON.parse(response);
 
             if (this.hasRequiredStats(courseData) && !this.isMultiSubject(courseData)) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,
-                    this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
-                    this.generateLink.bind(this));
-            } else {
-                new NoDataWidget(this.targetDiv, this.language, this.languageKey, this.kismode,
-                    this.generateLink.bind(this));
+                                this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
+                                this.generateLink.bind(this));
+            }
+            else {
+                new NoDataWidget(this.targetDiv, courseData.course_name, courseData.institution_name, this.language,
+                this.languageKey, this.kismode, this.generateLink.bind(this));
             }
         } else {
-            new NoDataWidget(this.targetDiv, this.language, this.languageKey, this.kismode,
-                this.generateLink.bind(this));
+            new NoDataWidget(this.targetDiv, "", "", this.language, this.languageKey, this.kismode,
+                                this.generateLink.bind(this));
         }
     },
 
@@ -235,7 +252,7 @@ DiscoverUniWidget.prototype = {
 }
 
 var DataWidget = function(targetDiv, courseData, language, languageKey, kismode, hasOverall, hasTeaching, hasWork,
-                          generateLink) {
+                            generateLink) {
     this.targetDiv = targetDiv;
     this.courseData = courseData
     this.language = language;
@@ -294,7 +311,7 @@ DataWidget.prototype = {
     },
 
     createTitleNode: function(titleText) {
-        var titleNode = document.createElement('p');
+        var titleNode = document.createElement('h1');
         titleNode.classList.add('title');
         var title = document.createTextNode(titleText);
         titleNode.appendChild(title);
@@ -311,7 +328,7 @@ DataWidget.prototype = {
 
     renderSatisfactionSlide: function() {
         var isNotAggregated = this.courseData.statistics.nss[0].aggregation_level === 14 ||
-            this.courseData.statistics.nss[0].aggregation_level === 24
+                                this.courseData.statistics.nss[0].aggregation_level === 24
 
         var percentage = this.courseData.statistics.nss[0].question_27.agree_or_strongly_agree + '%';
         var introText = CONTENT.satisfactionIntro[this.language];
@@ -325,7 +342,7 @@ DataWidget.prototype = {
 
     renderExplanationSlide: function() {
         var isNotAggregated = this.courseData.statistics.nss[0].aggregation_level === 14 ||
-            this.courseData.statistics.nss[0].aggregation_level === 24
+                                this.courseData.statistics.nss[0].aggregation_level === 24
 
         var percentage = this.courseData.statistics.nss[0].question_1.agree_or_strongly_agree + '%';
         var introText = CONTENT.explanationIntro[this.language];
@@ -339,7 +356,7 @@ DataWidget.prototype = {
 
     renderWorkSlide: function() {
         var isNotAggregated = this.courseData.statistics.employment[0].aggregation_level === 14 ||
-            this.courseData.statistics.employment[0].aggregation_level === 24
+                                this.courseData.statistics.employment[0].aggregation_level === 24
 
         var percentage = this.courseData.statistics.employment[0].in_work_or_study + '%';
         var introText = CONTENT.workIntro[this.language];
@@ -358,14 +375,16 @@ DataWidget.prototype = {
         var courseNode = document.createElement("p");
         courseNode.classList.add('course');
 
+        var courseName = this.courseData.course_name[this.languageKey];
+        if (typeof courseName === 'undefined') {
+            courseName = this.courseData.course_name['english'];
+        }
         if (isNotAggregated) {
-            var courseName = this.courseData.course_name[this.languageKey];
             courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
             courseName += this.courseData.title[this.languageKey]
             var dataFor = CONTENT.dataFor[this.language];
             var course = document.createTextNode(dataFor + courseName);
         } else {
-            var courseName = this.courseData.course_name[this.languageKey];
             var dataFor = CONTENT.dataForAggregated[this.language];
             var at = CONTENT.at[this.language];
             var institution = this.courseData.institution_name[this.languageKey];
@@ -381,13 +400,13 @@ DataWidget.prototype = {
             var featureList = [this.kismode];
             var placementYear = this.courseData.sandwich_year.code;
             featureList.push(placementYear === 1 ? CONTENT.placementOptional[this.language] :
-                placementYear === 2 ? CONTENT.placement[this.language] : null)
+                                placementYear === 2 ? CONTENT.placement[this.language] : null)
             var yearAbroad = this.courseData.sandwich_year.code;
             featureList.push(yearAbroad === 1 ? CONTENT.abroadOptional[this.language] :
-                yearAbroad === 2 ? CONTENT.abroad[this.language] : null)
+                                yearAbroad === 2 ? CONTENT.abroad[this.language] : null)
             var foundationYear = this.courseData.sandwich_year.code;
             featureList.push(foundationYear === 1 ? CONTENT.foundationOptional[this.language] :
-                foundationYear === 2 ? CONTENT.foundation[this.language] : null)
+                                foundationYear === 2 ? CONTENT.foundation[this.language] : null)
             var features = document.createTextNode(featureList.filter(Boolean).join(', '));
             featuresNode.appendChild(features);
 
@@ -401,21 +420,33 @@ DataWidget.prototype = {
         var ctaBlockNode = document.createElement('div');
         ctaBlockNode.classList.add('widget-cta-block');
 
-        var leadNode = document.createElement("span");
-        leadNode.classList.add('widget-cta-lead');
-        var lead = document.createTextNode(CONTENT.ctaLead[this.language]);
-        leadNode.appendChild(lead);
+        var headingNode = document.createElement('h1');
+        var leadNode1 = document.createElement("span");
+        leadNode1.classList.add('cta-lead');
+        var lead1 = document.createTextNode(CONTENT.ctaLead1[this.language]);
+        var leadNode2 = document.createElement("strong");
+        leadNode2.classList.add('cta-lead');
+        var lead2 = document.createTextNode(CONTENT.ctaLead2[this.language]);
+        var leadNode3 = document.createElement("span");
+        leadNode3.classList.add('cta-lead');
+        var lead3 = document.createTextNode(CONTENT.ctaLead3[this.language]);
+        leadNode1.appendChild(lead1);
+        leadNode2.appendChild(lead2);
+        leadNode3.appendChild(lead3);
+        headingNode.appendChild(leadNode1);
+        headingNode.appendChild(leadNode2);
+        headingNode.appendChild(leadNode3);
 
-        ctaBlockNode.appendChild(leadNode);
+        ctaBlockNode.appendChild(headingNode);
 
         var logoNode = document.createElement('img');
-        logoNode.classList.add('widget-cta-logo');
+        logoNode.classList.add('logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
         logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
-        ctaWrapperNode.classList.add('widget-cta-button');
+        ctaWrapperNode.classList.add('cta');
 
         var ctaNode = document.createElement('a');
         ctaNode.href = this.generateLink();
@@ -431,7 +462,7 @@ DataWidget.prototype = {
 
     carousel: function() {
         var i;
-        var slides = this.targetDiv.getElementsByClassName("lead-slide");
+        var slides = document.getElementsByClassName("lead-slide");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
@@ -444,8 +475,10 @@ DataWidget.prototype = {
     }
 }
 
-var NoDataWidget = function(targetDiv, language, languageKey, kismode, generateLink) {
+var NoDataWidget = function(targetDiv, courseName, institutionName ,language, languageKey, kismode, generateLink) {
     this.targetDiv = targetDiv;
+    this.courseName = courseName;
+    this.institutionName = institutionName;
     this.language = language;
     this.languageKey= languageKey;
     this.kismode =  kismode;
@@ -459,15 +492,42 @@ NoDataWidget.prototype = {
         this.renderNoDataCTABlock();
     },
 
-    renderNoDataLead: function() {
-        this.targetDiv.classList.add('no-data');
+    renderNoDataLead: function(parentNode) {
         var leadNode = document.createElement('div');
         leadNode.classList.add('widget-lead');
+
+        if (typeof this.courseName[this.languageKey] !== 'undefined' && typeof this.institutionName[this.languageKey] !== 'undefined') {
+            var courseNode = document.createElement("p");
+            courseNode.classList.add('intro');
+
+            var courseName = this.courseName[this.languageKey];
+            var at = CONTENT.at[this.language];
+            var institution = this.institutionName[this.languageKey];
+            var course = document.createTextNode(courseName + at + institution);
+
+            courseNode.appendChild(course);
+            leadNode.appendChild(courseNode);
+        } else {
+            var courseNode = document.createElement("p");
+            courseNode.classList.add('intro');
+            courseName = this.courseName['english'];
+            var at = CONTENT.at['en-gb']
+            var institution = this.institutionName['english'];
+            var course = document.createTextNode(courseName + at + institution);
+
+            courseNode.appendChild(course);
+            leadNode.appendChild(courseNode);
+        }
+
+        var courseDetailsNode = document.createElement('div');
+        courseDetailsNode.classList.add('course-details');
+
         var introNode = document.createElement("p");
-        introNode.classList.add('intro');
+        introNode.classList.add('course');
         var intro = document.createTextNode(CONTENT.noDataIntro[this.language]);
         introNode.appendChild(intro);
-        leadNode.appendChild(introNode);
+        courseDetailsNode.appendChild(introNode);
+        leadNode.appendChild(courseDetailsNode);
         this.targetDiv.appendChild(leadNode);
     },
 
@@ -475,21 +535,33 @@ NoDataWidget.prototype = {
         var ctaBlockNode = document.createElement('div');
         ctaBlockNode.classList.add('widget-cta-block');
 
-        var leadNode = document.createElement("span");
-        leadNode.classList.add('widget-cta-lead');
-        var lead = document.createTextNode(CONTENT.noDataCtaLead[this.language]);
-        leadNode.appendChild(lead);
+        var headingNode = document.createElement('h1');
+        var leadNode1 = document.createElement("span");
+        leadNode1.classList.add('cta-lead');
+        var lead1 = document.createTextNode(CONTENT.noDataCtaLead1[this.language]);
+        var leadNode2 = document.createElement("strong");
+        leadNode2.classList.add('cta-lead');
+        var lead2 = document.createTextNode(CONTENT.noDataCtaLead2[this.language]);
+        var leadNode3 = document.createElement("span");
+        leadNode3.classList.add('cta-lead');
+        var lead3 = document.createTextNode(CONTENT.noDataCtaLead3[this.language]);
+        leadNode1.appendChild(lead1);
+        leadNode2.appendChild(lead2);
+        leadNode3.appendChild(lead3);
+        headingNode.appendChild(leadNode1);
+        headingNode.appendChild(leadNode2);
+        headingNode.appendChild(leadNode3);
 
-        ctaBlockNode.appendChild(leadNode);
+        ctaBlockNode.appendChild(headingNode);
 
         var logoNode = document.createElement('img');
-        logoNode.classList.add('widget-cta-logo');
+        logoNode.classList.add('logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
         logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
-        ctaWrapperNode.classList.add('widget-cta-button');
+        ctaWrapperNode.classList.add('cta');
         var ctaNode = document.createElement('a');
         ctaNode.setAttribute('target', '_blank');
         ctaNode.href = this.generateLink();
