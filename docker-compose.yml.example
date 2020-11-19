@@ -6,9 +6,9 @@ services:
     environment:
       NAME: "dave"
       # https://portal.azure.com > prod-widget-discover-uni > Configuration
-      WIDGETAPIHOST: "https://prod-discoveruni.azure-api.net/widget"
-      WIDGETAPIKEY: "e915475558d3458c993d0c3aa74b3eef"
-      ROOT_DOMAIN: "https://discoveruni.gov.uk"
+      WIDGETAPIKEY: "..."
+      WIDGETAPIHOST: "..."
+      ROOT_DOMAIN: "..."
     volumes:
       - .:/usr/src/service
     working_dir: /usr/src/service

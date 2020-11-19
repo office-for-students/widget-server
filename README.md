@@ -3,32 +3,23 @@
 [![Build Status](https://dev.azure.com/ofsbeta/discoverUni/_apis/build/status/dev/dev-widget-server-build?branchName=develop)](https://dev.azure.com/ofsbeta/discoverUni/_build/latest?definitionId=43&branchName=develop)
 [![Build Status](https://dev.azure.com/ofsbeta/discoverUni/_apis/build/status/prod/prod-widget-server-build?branchName=develop)](https://dev.azure.com/ofsbeta/discoverUni/_build/latest?definitionId=46&branchName=master)
 
-<!-- vim-markdown-toc GitLab -->
+# Setup
 
-* [About this application](#about-this-application)
-    * [Purpose of this app](#purpose-of-this-app)
-    * [Tech stack](#tech-stack)
-* [Contributing](#contributing)
-* [License](#license)
+## Docker
 
-<!-- vim-markdown-toc -->
+```
+# make install
+# make dev
+```
 
-## About this application
+## Accessing the Site
 
-### Purpose of this app
+```
+# curl -i localhost:8001/Widget/10007163/U-Q300/horizontal/small/en-GB
+HTTP/1.1 200 OK
+...
+```
 
-The purpose of this app is to provide a light weight server to serve the IFrame html and javascript file used to embed the DiscoverUni widget on university websites. 
+# Loading an example widget
 
-### Tech stack
-
-This project utilises:
-- NodeJS framework
-- Express server
-
-## Contributing
-
-See [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## License
-
-See [LICENSE](LICENSE.md) for details.
+Drag'n'drop `test.html` into your browser. It should load up a test widget.

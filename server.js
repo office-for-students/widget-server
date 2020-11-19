@@ -5,6 +5,9 @@ const hbs = require('hbs');
 const compression = require('compression');
 const helmet = require('helmet');
 
+const fs = require('fs');
+const path = require("path");
+
 const PORT = 80;
 const HOST = '0.0.0.0';
 
@@ -13,6 +16,11 @@ app.set('view engine', 'hbs');
 app.use(express.static('public'));
 app.use(compression());
 app.use(helmet());
+
+app.get('/', (req, res) => {
+    res.writeHead(200, {'Content-type': 'text/plain'});
+    res.end('Hello World!');
+});
 
 app.get('/widget/:uniId/:courseId/small', (req, res) => {
     res.removeHeader('X-Frame-Options');
@@ -45,8 +53,13 @@ app.get('/widget/:uniId/:courseId/:optional1/small/:optional2/:optional3', (req,
 });
 
 app.get('/widget/embed-script', (req, res) => {
+    //console.log('The value of WIDGETAPIKEY is:', process.env.WIDGETAPIKEY);
     res.removeHeader('X-Frame-Options');
-    res.sendFile('public/widget.js', { root: __dirname });
+    var str = fs.readFileSync(path.join(__dirname, 'public/widget.js'), 'utf8');
+    str = str.replace('{!!api_host!!}', process.env.WIDGETAPIHOST);
+    str = str.replace('{!!api_key!!}', process.env.WIDGETAPIKEY);
+    res.set('Content-Type', 'text/javascript');
+    res.send(str);
 });
 
 app.get('/widget/embed-script.js', (req, res) => {
@@ -128,3 +141,4 @@ function processParams(params) {
 }
 
 app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
