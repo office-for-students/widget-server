@@ -167,13 +167,13 @@ DiscoverUniWidget.prototype = {
         xhttp.addEventListener("load", function() {
             that.renderWidget(this.status, this.response);
         });
-        base_url = "{!!api_host!!}/institutions/{{uni_id}}/courses/{{course_id}}/modes/{{mode}}";
+        base_url = "{{api_domain}}/institutions/{{uni_id}}/courses/{{course_id}}/modes/{{mode}}";
         url = base_url.replace('{{uni_id}}', this.institution);
         url = url.replace('{{course_id}}', this.course);
         url = url.replace('{{mode}}', MODES[this.kismode.toLowerCase()]);
 
         xhttp.open("GET", url, true);
-        xhttp.setRequestHeader('Ocp-Apim-Subscription-Key', '{!!api_key!!}');
+        xhttp.setRequestHeader('Ocp-Apim-Subscription-Key', '{{api_key}}');
         xhttp.send();
     },
 
@@ -181,6 +181,9 @@ DiscoverUniWidget.prototype = {
     renderWidget: function(status, response) {
         if (status === 200) {
             var courseData = JSON.parse(response);
+
+            console.log(this.hasRequiredStats(courseData));
+            console.log(!this.isMultiSubject(courseData));
 
             if (this.hasRequiredStats(courseData) && !this.isMultiSubject(courseData)) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,

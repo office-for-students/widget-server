@@ -53,11 +53,16 @@ app.get('/widget/:uniId/:courseId/:optional1/small/:optional2/:optional3', (req,
 });
 
 app.get('/widget/embed-script', (req, res) => {
-    //console.log('The value of WIDGETAPIKEY is:', process.env.WIDGETAPIKEY);
     res.removeHeader('X-Frame-Options');
     var str = fs.readFileSync(path.join(__dirname, 'public/widget.js'), 'utf8');
-    str = str.replace('{!!api_host!!}', process.env.WIDGETAPIHOST);
-    str = str.replace('{!!api_key!!}', process.env.WIDGETAPIKEY);
+    if (process.env.LOCAL_DEV) {
+        str = str.replace('{{domain_name}}', process.env.ROOT_DOMAIN);
+        str = str.replace('{{api_domain}}', process.env.WIDGETAPIHOST);
+        str = str.replace('{{api_key}}', process.env.WIDGETAPIKEY);
+        var css_data = fs.readFileSync('public/widget.css', 'utf8');
+        css_data = css_data.replace(/[\n\r]+/g, '').replace(/\s{2,10}/g, ' ');
+        str = str.replace('{{styles}}', css_data);
+    }
     res.set('Content-Type', 'text/javascript');
     res.send(str);
 });
