@@ -165,7 +165,6 @@ DiscoverUniWidget.prototype = {
         var that = this;
         var xhttp = new XMLHttpRequest();
         xhttp.addEventListener("load", function() {
-            console.log(this.response);
             that.renderWidget(this.status, this.response);
         });
         base_url = "{{api_domain}}/institutions/{{uni_id}}/courses/{{course_id}}/modes/{{mode}}";
