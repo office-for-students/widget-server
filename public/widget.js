@@ -165,6 +165,7 @@ DiscoverUniWidget.prototype = {
         var that = this;
         var xhttp = new XMLHttpRequest();
         xhttp.addEventListener("load", function() {
+            console.log(this.response);
             that.renderWidget(this.status, this.response);
         });
         base_url = "{{api_domain}}/institutions/{{uni_id}}/courses/{{course_id}}/modes/{{mode}}";
@@ -181,9 +182,6 @@ DiscoverUniWidget.prototype = {
     renderWidget: function(status, response) {
         if (status === 200) {
             var courseData = JSON.parse(response);
-
-            console.log(this.hasRequiredStats(courseData));
-            console.log(!this.isMultiSubject(courseData));
 
             if (this.hasRequiredStats(courseData) && !this.isMultiSubject(courseData)) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,
