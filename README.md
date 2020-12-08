@@ -8,6 +8,13 @@
 ## Docker
 
 ```
+# cp docker-compose.yml.example docker-compose.yml
+# vim docker-compose.yml
+...
+WIDGETAPIKEY: "..."
+WIDGETAPIHOST: "..."
+ROOT_DOMAIN: "..."
+...
 # make install
 # make dev
 ```
