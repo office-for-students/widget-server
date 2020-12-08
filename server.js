@@ -17,10 +17,12 @@ app.use(express.static('public'));
 app.use(compression());
 app.use(helmet());
 
-app.get('/', (req, res) => {
-    res.writeHead(200, {'Content-type': 'text/plain'});
-    res.end('Hello World!');
-});
+if (process.env.LOCAL_DEV) {
+    app.get('/', (req, res) => {
+        res.writeHead(200, {'Content-type': 'text/plain'});
+        res.end('Hello World!');
+    });
+}
 
 app.get('/widget/:uniId/:courseId/small', (req, res) => {
     res.removeHeader('X-Frame-Options');
