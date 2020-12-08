@@ -24,8 +24,8 @@ var CONTENT = {
         'cy-gb': ' o wybodaeth swyddogol am y cwrs, ewch i'
     },
     'logo': {
-        'en-gb': 'images/widget_logo_english.svg',
-        'cy-gb': 'images/widget_logo_welsh.svg'
+        'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
+        'cy-gb': '{{domain_name}}/static/images/logos/widget_logo_welsh.svg'
     },
     'logoAlt': {
         'en-gb': 'DiscoverUni',
