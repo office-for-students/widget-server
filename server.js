@@ -5,6 +5,9 @@ const hbs = require('hbs');
 const compression = require('compression');
 const helmet = require('helmet');
 
+const fs = require('fs');
+const path = require("path");
+
 const PORT = 80;
 const HOST = '0.0.0.0';
 
@@ -13,6 +16,13 @@ app.set('view engine', 'hbs');
 app.use(express.static('public'));
 app.use(compression());
 app.use(helmet());
+
+if (process.env.LOCAL_DEV) {
+    app.get('/', (req, res) => {
+        res.writeHead(200, {'Content-type': 'text/plain'});
+        res.end('Hello World!');
+    });
+}
 
 app.get('/widget/:uniId/:courseId/small', (req, res) => {
     res.removeHeader('X-Frame-Options');
@@ -46,7 +56,17 @@ app.get('/widget/:uniId/:courseId/:optional1/small/:optional2/:optional3', (req,
 
 app.get('/widget/embed-script', (req, res) => {
     res.removeHeader('X-Frame-Options');
-    res.sendFile('public/widget.js', { root: __dirname });
+    var str = fs.readFileSync(path.join(__dirname, 'public/widget.js'), 'utf8');
+    if (process.env.LOCAL_DEV) {
+        str = str.replace('{{domain_name}}', process.env.ROOT_DOMAIN);
+        str = str.replace('{{api_domain}}', process.env.WIDGETAPIHOST);
+        str = str.replace('{{api_key}}', process.env.WIDGETAPIKEY);
+        var css_data = fs.readFileSync('public/widget.css', 'utf8');
+        css_data = css_data.replace(/[\n\r]+/g, '').replace(/\s{2,10}/g, ' ');
+        str = str.replace('{{styles}}', css_data);
+    }
+    res.set('Content-Type', 'text/javascript');
+    res.send(str);
 });
 
 app.get('/widget/embed-script.js', (req, res) => {
@@ -128,3 +148,7 @@ function processParams(params) {
 }
 
 app.listen(PORT, HOST);
+
+if (process.env.LOCAL_DEV) {
+    console.log(`Running on http://${HOST}:${process.env.EXTERNAL_PORT}`);
+}

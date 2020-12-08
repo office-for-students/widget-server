@@ -1,0 +1,41 @@
+<!doctype html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <!-- Something that works -->
+    <!-- <div class="kis-widget" data-institution="10007786" data-course="1ENGL001UU-201920" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div> -->
+    <!-- Manchester: (has two earnings numbers so won't show the statics. Look at Halo ticket 7199) -->
+    <!-- <div class="kis-widget" data-institution="10007798" data-course="106" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div> -->
+    <!-- St. Andrews: Ancient History -->
+    <!-- <div class="kis-widget" data-institution="10007803" data-course="UAHFAHASAHA" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div> -->
+    <!-- Cardiff: Accounting -->
+    <!-- <div class="kis-widget" data-institution="10007814" data-course="UFBSACCA" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div> -->
+    <!-- Aberdeen: Accountancy -->
+    <div class="kis-widget" data-institution="10007783" data-course="N400" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div>
+    <script>
+        (function (d) {
+            "use strict";
+            var widgetScript = d.createElement('script');
+            widgetScript.id = 'unistats-widget-script';
+            widgetScript.src = 'http://localhost:8001/widget/embed-script';
+            var scriptTags = d.getElementsByTagName('script')[0];
+            if (d.getElementById('unistats-widget-script')) { return; }
+            scriptTags.parentNode.insertBefore(widgetScript, scriptTags);
+            } (document));
+    </script>
+</body>
+
+<!--
+<div class="kis-widget" data-institution="10007798" data-course="106" data-kismode="FullTime" data-orientation="horizontal" data-size="small" data-language="en-GB">
+    <iframe scrolling="no" id="unistats-widget-frame-36" title="Unistats KIS Widget" src="http://localhost:8001/Widget/10007163/U-Q300/horizontal/small/en-GB" style="border-width: 0px; border-style: none; overflow: hidden; width: 615px; min-height: 150px;"></iframe>
+</div>
+-->
+
+<!--
+<div class="kis-widget" data-institution="10004835" data-course="IDKFDSS-SPORTS_STUDIES_OAK" data-kismode="FullTime" data-orientation="horizontal" data-language="en-gb"></div>
+<script id='unistats-widget-script' src="/widget/embed-script/" type="e654123b6ebea866f8b6bedb-text/javascript"></script>
+-->

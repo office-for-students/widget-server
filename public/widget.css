@@ -59,6 +59,7 @@
 }
 
 .kis-widget .widget-cta-block h1 {
+    line-height: 16px;
     font-weight: normal;
     margin: 0px;
 }
