@@ -148,4 +148,7 @@ function processParams(params) {
 }
 
 app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+
+if (process.env.LOCAL_DEV) {
+    console.log(`Running on http://${HOST}:${process.env.EXTERNAL_PORT}`);
+}

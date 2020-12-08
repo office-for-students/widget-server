@@ -6,12 +6,13 @@ services:
     environment:
       # these have to be here as the variables in the script are replaced with
       # environment variables when it is rolled out (crazy, I know)
-      # 
+      #
       # https://portal.azure.com > prod-widget-discover-uni > Configuration
       WIDGETAPIKEY: "..."
       WIDGETAPIHOST: "..."
       ROOT_DOMAIN: "..."
       LOCAL_DEV: "true"
+      EXTERNAL_PORT: "8001"
     volumes:
       - .:/usr/src/service
     working_dir: /usr/src/service
