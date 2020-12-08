@@ -4,7 +4,6 @@ services:
   web:
     image: node:10
     environment:
-      NAME: "dave"
       # https://portal.azure.com > prod-widget-discover-uni > Configuration
       WIDGETAPIKEY: "..."
       WIDGETAPIHOST: "..."
