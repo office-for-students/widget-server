@@ -17,18 +17,18 @@
 
     .kis-widget.horizontal .kis-widget__heading, .kis-widget.responsive .kis-widget__heading{
         margin:0;
-        line-height: 1;
+        line-height: 1.2;
     }
     .kis-widget.vertical .kis-widget__heading{
         margin:0;
         margin-bottom:1rem;
-        line-height: 1;
+        line-height: 1.2;
     }
     
 
     .kis-widget.horizontal .kis-widget__heading .kis-widget__cta-block .kis-widget__heading h3, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading span, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading strong{
         margin:0;
-        line-height: 0;
+        line-height: 1.2;
         font-size:15px;
     }
 
