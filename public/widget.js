@@ -274,7 +274,7 @@ DataWidget.prototype = {
 
     renderDataLead: function() {
         var leadNode = document.createElement('div');
-        leadNode.classList.add('widget-lead');
+        leadNode.classList.add('kis-widget__lead');
         if (this.hasOverall) {
             leadNode.appendChild(this.renderSatisfactionSlide());
         }
@@ -291,18 +291,21 @@ DataWidget.prototype = {
 
     createSlideNode: function(idName, statNode, isNotAggregated) {
         var slideNode = document.createElement('div');
-        slideNode.classList.add('lead-slide', 'fade');
+        slideNode.classList.add('kis-widget__lead-slide', 'kis-widget__fade');
         slideNode.id = idName;
+        var slideSurroundNode = document.createElement('div');
+        slideSurroundNode.classList.add('kis-widget__lead-surround-stat');
+        slideNode.appendChild(slideSurroundNode);
 
-        slideNode.appendChild(statNode);
-        slideNode.appendChild(this.renderCourseDetails(isNotAggregated));
+        slideSurroundNode.appendChild(statNode);
+        slideSurroundNode.appendChild(this.renderCourseDetails(isNotAggregated));
 
         return slideNode;
     },
 
     createStatNode: function(titleNode, introNode) {
         var statNode = document.createElement('div');
-        statNode.classList.add('stat');
+        statNode.classList.add('kis-widget__stat');
 
         statNode.appendChild(titleNode);
         statNode.appendChild(introNode);
@@ -311,8 +314,8 @@ DataWidget.prototype = {
     },
 
     createTitleNode: function(titleText) {
-        var titleNode = document.createElement('h1');
-        titleNode.classList.add('title');
+        var titleNode = document.createElement('h3');
+        titleNode.classList.add('kis-widget__title');
         var title = document.createTextNode(titleText);
         titleNode.appendChild(title);
         return titleNode;
@@ -320,7 +323,7 @@ DataWidget.prototype = {
 
     createIntroNode: function(introText) {
         var introNode = document.createElement("p");
-        introNode.classList.add('intro');
+        introNode.classList.add('kis-widget__intro');
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
         return introNode;
@@ -370,10 +373,10 @@ DataWidget.prototype = {
 
     renderCourseDetails: function(isNotAggregated)  {
         var courseDetailsNode = document.createElement('div');
-        courseDetailsNode.classList.add('course-details');
+        courseDetailsNode.classList.add('kis-widget__course-details');
 
         var courseNode = document.createElement("p");
-        courseNode.classList.add('course');
+        courseNode.classList.add('kis-widget__course');
 
         var courseName = this.courseData.course_name[this.languageKey];
         if (typeof courseName === 'undefined') {
@@ -396,7 +399,7 @@ DataWidget.prototype = {
 
         if (isNotAggregated) {
             var featuresNode = document.createElement("p");
-            featuresNode.classList.add('course');
+            featuresNode.classList.add('kis-widget__course');
             var featureList = [this.kismode];
             var placementYear = this.courseData.sandwich_year.code;
             featureList.push(placementYear === 1 ? CONTENT.placementOptional[this.language] :
@@ -418,17 +421,17 @@ DataWidget.prototype = {
 
     renderCTABlock: function() {
         var ctaBlockNode = document.createElement('div');
-        ctaBlockNode.classList.add('widget-cta-block');
-
-        var headingNode = document.createElement('h1');
+        ctaBlockNode.classList.add('kis-widget__cta-block');
+        var headingNode = document.createElement('h3');
+        headingNode.classList.add('kis-widget__heading');
         var leadNode1 = document.createElement("span");
-        leadNode1.classList.add('cta-lead');
+        // leadNode1.classList.add('cta-lead');
         var lead1 = document.createTextNode(CONTENT.ctaLead1[this.language]);
         var leadNode2 = document.createElement("strong");
-        leadNode2.classList.add('cta-lead');
+        // leadNode2.classList.add('cta-lead');
         var lead2 = document.createTextNode(CONTENT.ctaLead2[this.language]);
         var leadNode3 = document.createElement("span");
-        leadNode3.classList.add('cta-lead');
+        // leadNode3.classList.add('cta-lead');
         var lead3 = document.createTextNode(CONTENT.ctaLead3[this.language]);
         leadNode1.appendChild(lead1);
         leadNode2.appendChild(lead2);
@@ -440,13 +443,13 @@ DataWidget.prototype = {
         ctaBlockNode.appendChild(headingNode);
 
         var logoNode = document.createElement('img');
-        logoNode.classList.add('logo');
+        logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
         logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
-        ctaWrapperNode.classList.add('cta');
+        ctaWrapperNode.classList.add('kis-widget__cta');
 
         var ctaNode = document.createElement('a');
         ctaNode.href = this.generateLink();
@@ -462,7 +465,7 @@ DataWidget.prototype = {
 
     carousel: function() {
         var i;
-        var slides = document.getElementsByClassName("lead-slide");
+        var slides = document.getElementsByClassName("kis-widget__lead-slide");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
@@ -494,11 +497,11 @@ NoDataWidget.prototype = {
 
     renderNoDataLead: function(parentNode) {
         var leadNode = document.createElement('div');
-        leadNode.classList.add('widget-lead');
+        leadNode.classList.add('kis-widget__lead');
 
         if (typeof this.courseName[this.languageKey] !== 'undefined' && typeof this.institutionName[this.languageKey] !== 'undefined') {
             var courseNode = document.createElement("p");
-            courseNode.classList.add('intro');
+            courseNode.classList.add('kis-widget__intro');
 
             var courseName = this.courseName[this.languageKey];
             var at = CONTENT.at[this.language];
@@ -509,7 +512,7 @@ NoDataWidget.prototype = {
             leadNode.appendChild(courseNode);
         } else {
             var courseNode = document.createElement("p");
-            courseNode.classList.add('intro');
+            courseNode.classList.add('kis-widget__intro');
             courseName = this.courseName['english'];
             var at = CONTENT.at['en-gb']
             var institution = this.institutionName['english'];
@@ -520,10 +523,10 @@ NoDataWidget.prototype = {
         }
 
         var courseDetailsNode = document.createElement('div');
-        courseDetailsNode.classList.add('course-details');
+        courseDetailsNode.classList.add('kis-widget__course-details');
 
         var introNode = document.createElement("p");
-        introNode.classList.add('course');
+        introNode.classList.add('kis-widget__course');
         var intro = document.createTextNode(CONTENT.noDataIntro[this.language]);
         introNode.appendChild(intro);
         courseDetailsNode.appendChild(introNode);
@@ -533,18 +536,19 @@ NoDataWidget.prototype = {
 
     renderNoDataCTABlock: function() {
         var ctaBlockNode = document.createElement('div');
-        ctaBlockNode.classList.add('widget-cta-block');
-
-        var headingNode = document.createElement('h1');
+        ctaBlockNode.classList.add('kis-widget__cta-block');
+        var headingNode = document.createElement('h3');
+        headingNode.classList.add('kis-widget__heading');
         var leadNode1 = document.createElement("span");
-        leadNode1.classList.add('cta-lead');
+        leadNode1.classList.add('kis-widget__cta-lead');
         var lead1 = document.createTextNode(CONTENT.noDataCtaLead1[this.language]);
         var leadNode2 = document.createElement("strong");
-        leadNode2.classList.add('cta-lead');
+        leadNode2.classList.add('kis-widget__cta-lead');
         var lead2 = document.createTextNode(CONTENT.noDataCtaLead2[this.language]);
         var leadNode3 = document.createElement("span");
-        leadNode3.classList.add('cta-lead');
+        leadNode3.classList.add('kis-widget__cta-lead');
         var lead3 = document.createTextNode(CONTENT.noDataCtaLead3[this.language]);
+        
         leadNode1.appendChild(lead1);
         leadNode2.appendChild(lead2);
         leadNode3.appendChild(lead3);
@@ -555,13 +559,13 @@ NoDataWidget.prototype = {
         ctaBlockNode.appendChild(headingNode);
 
         var logoNode = document.createElement('img');
-        logoNode.classList.add('logo');
+        logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
         logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
-        ctaWrapperNode.classList.add('cta');
+        ctaWrapperNode.classList.add('kis-widget__cta');
         var ctaNode = document.createElement('a');
         ctaNode.setAttribute('target', '_blank');
         ctaNode.href = this.generateLink();
