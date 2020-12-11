@@ -1,40 +1,5 @@
-
     .kis-widget__body {
         margin: 0px;
-    }
-
-    .kis-widget__intro{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .kis-widget .kis-widget__cta-block .kis-widget__heading h3, .kis-widget .kis-widget__cta-block .kis-widget__heading span{
-        color:white;
-        font-size:15px;
-        font-weight:normal;
-    }
-
-    .kis-widget.horizontal .kis-widget__heading, .kis-widget.responsive .kis-widget__heading{
-        margin:0;
-        line-height: 1.2;
-    }
-    .kis-widget.vertical .kis-widget__heading{
-        margin:0;
-        margin-bottom:1rem;
-        line-height: 1.2;
-    }
-    
-
-    .kis-widget.horizontal .kis-widget__heading .kis-widget__cta-block .kis-widget__heading h3, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading span, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading strong{
-        margin:0;
-        line-height: 1.2;
-        font-size:15px;
-    }
-
-    .kis-widget .kis-widget__cta-block .kis-widget__heading strong{
-        color:white;
-        font-size:15px;
     }
 
     .kis-widget {
@@ -43,7 +8,53 @@
         display: flex;
     }
 
-    .kis-widget__lead {
+    .kis-widget .kis-widget__intro{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-family: Nunito Sans;
+    }
+
+    .kis-widget .kis-widget__cta-block .kis-widget__heading h3, .kis-widget .kis-widget__cta-block .kis-widget__heading span{
+        color:white;
+        font-size:15px;
+        font-weight:normal;
+        text-align:left;
+        font-family: Nunito Sans;
+    }
+
+    .kis-widget.horizontal .kis-widget__heading, .kis-widget.responsive .kis-widget__heading{
+        margin:0;
+        line-height: 1;
+        text-align:left;
+        font-family: Nunito Sans;
+    }
+    .kis-widget.vertical .kis-widget__heading{
+        margin:0;
+        margin-bottom:1rem;
+        line-height: 1;
+        text-align:left;
+        font-family: Nunito Sans;
+    }
+    
+
+    .kis-widget.horizontal .kis-widget__heading .kis-widget__cta-block .kis-widget__heading h3, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading span, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading strong{
+        margin:0;
+        line-height: 1;
+        font-size:15px;
+        text-align:left;
+        font-family: Nunito Sans;
+    }
+
+    .kis-widget .kis-widget__cta-block .kis-widget__heading strong{
+        color:white;
+        font-size:15px;
+        text-align:left;
+        font-family: Nunito Sans;
+    }
+
+    .kis-widget .kis-widget__lead {
+        font-family: Nunito Sans;
         background-color: white;
         color: #308282;
     }
@@ -52,10 +63,12 @@
         font-size: 15px;
         line-height: 20px;
         margin: 0px;
+        font-family: Nunito Sans;
     }
 
     .kis-widget .kis-widget__cta-block {
-        padding: 15px 15px 21px 15px;
+        font-family: Nunito Sans;
+        padding: 10px;
         background: linear-gradient(145.9deg, #4EA27D 13.02%, #308282 85.42%);
     }
 
@@ -63,6 +76,7 @@
         font-size: 13px;
         line-height: 16px;
         color: white;
+        font-family: Nunito Sans;
     }
 
     .kis-widget .kis-widget__cta-block .kis-widget__logo {
@@ -79,7 +93,7 @@
     }
 
     .kis-widget.horizontal .kis-widget__cta-block .kis-widget__logo {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .kis-widget .kis-widget__cta-block .kis-widget__cta {
@@ -92,14 +106,16 @@
         width: 100%;
         padding-top: 9px;
         padding-bottom: 9px;
+        font-family: Nunito Sans;
     }
 
     .kis-widget .kis-widget__cta-block .kis-widget__cta a {
         color: #308282;
         text-decoration: none;
+        font-family: Nunito Sans;
     }
 
-    .kis-widget .kis-widget__cta-block h1 {
+    .kis-widget .kis-widget__cta-block h3 {
         line-height: 16px;
         font-weight: normal;
         margin: 0px;
@@ -110,12 +126,14 @@
         font-weight: normal;
         line-height: 57px;
         margin: 0;
+        font-family: Nunito Sans;
     }
 
     .kis-widget .kis-widget__lead .kis-widget__course {
         font-size: 11px;
         line-height: 13px;
         margin: 0px;
+        font-family: Nunito Sans;
     }
 
 
@@ -179,7 +197,7 @@
     }
 
     .kis-widget.vertical .kis-widget__cta-block {
-        padding: 15px 15px 21px 15px;
+        padding: 10px;
     }
 
     .kis-widget.horizontal.no-data .kis-widget__cta-block {
@@ -189,12 +207,14 @@
     }
 
     .kis-widget.horizontal .kis-widget__cta-block {
+        font-family: Nunito Sans;
         width: 225px;
         float: right;
-        padding: 15px 15px 20px 15px;
+        padding: 10px;
     }
 
     .kis-widget.vertical .kis-widget__lead .kis-widget__course-details {
+        font-family: Nunito Sans;
         position: absolute;
         bottom: 18px;
         padding-right: 15px;
