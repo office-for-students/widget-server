@@ -161,8 +161,8 @@
         align-items: flex-start;
     }
 
-    .kis-widget.responsive.vertical .kis-widget__lead {
-        padding: 15px 20px 120px 15px;
+    .kis-widget .kis-widget__lead {
+        padding: 15px 20px 184px 15px;
     }
 
     .kis-widget.vertical .kis-widget__lead {
