@@ -479,7 +479,7 @@ DataWidget.prototype = {
         if (this.slideIndex > slides.length) {this.slideIndex = 1}
 
         slides[this.slideIndex-1].style.display = "block";
-        setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
+        setTimeout(this.carousel.bind(this), 4000); // Change image every 5 seconds
     }
 }
 
