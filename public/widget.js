@@ -109,7 +109,7 @@ var LANGUAGE_KEYS = {
     'cy-gb': 'welsh'
 }
 
-var MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH = 400;
+var MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH = 614;
 
 var  DiscoverUniWidget = function(targetDiv) {
     this.targetDiv = targetDiv;
@@ -137,12 +137,17 @@ DiscoverUniWidget.prototype = {
 
     handleResponsive: function() {
         if (this.inIframe()) {
+            console.log('this.inIframe');
             if (window.innerWidth > window.innerHeight) {
                 this.targetDiv.classList.add('horizontal');
             } else {
                 this.targetDiv.classList.add('vertical');
             }
         } else {
+            console.log('NOT this.inIframe');
+            console.log('clientWidth: ' + this.targetDiv.clientWidth);
+            console.log('MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH: ' + MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH);
+
             if (this.targetDiv.clientWidth > MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH) {
                 this.targetDiv.classList.add('horizontal');
             } else {
@@ -474,7 +479,7 @@ DataWidget.prototype = {
         if (this.slideIndex > slides.length) {this.slideIndex = 1}
 
         slides[this.slideIndex-1].style.display = "block";
-        setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
+        setTimeout(this.carousel.bind(this), 4000); // Change image every 4 seconds
     }
 }
 
