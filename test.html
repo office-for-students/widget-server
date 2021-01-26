@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
 </head>
 
-<body style="background-color: darkgrey;">
+<body style="background-color: darkgrey; min-height:2000px">
     <!-- Something that works -->
     <!-- <div class="kis-widget" data-institution="10007786" data-course="1ENGL001UU-201920" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div> -->
     <!-- Manchester: (has two earnings numbers so won't show the statics. Look at Halo ticket 7199) -->
@@ -28,10 +28,24 @@
    
     <!-- responsive test -->
     <!-- minimum width for responsive item is 190 (height must be auto and not fixed) -->
-    <div style="width: 615px; height:150px">
+    <!-- <div style="width: 615px; height:150px">
         <div class="kis-widget" data-institution="10007783" data-course="N400" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div>
-    </div>
+    </div> -->
 
+    <!-- <iframe id="unistats-widget-frame" title="Unistats KIS Widget"
+    src="http://localhost:8001/widget/10007855/BSHS4XSSCSCS/responsive/small/en-GB/FullTime"
+    scrolling="no" style="overflow: hidden; border: 0px none transparent; min-width: 194px; min-height: 155px;width:100%;"></iframe> -->
+
+    <!-- <iframe id="unistats-widget-frame" title="Unistats KIS Widget"
+    src="http://localhost:8001/widget/10007855/BSHS4XSSCSCS/responsive/small/en-GB/FullTime"
+    scrolling="no"style="overflow: hidden; border: 0px none transparent; min-width:194px; width: 100%;"> -->
+
+    <!-- <div class="kis-widget" data-institution="10007812" data-course="UBAF-PAULIP1-USFRS" data-kismode="Fulltime" data-orientation="horizontal" data-language="en-GB"></div> -->
+
+    <!-- Test more than one html widget -->
+    <div style="min-width:190px;" class="kis-widget" data-institution="10000712" data-course="BSCSPT" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div>
+    <div style="min-width:190px;" class="kis-widget" data-institution="10000712" data-course="FDGSPT" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div>
+    </div>
     <script>
         (function (d) {
             "use strict";
