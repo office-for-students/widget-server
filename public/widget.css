@@ -10,8 +10,9 @@
     .kis-widget .kis-widget__intro{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: left;
         font-family: Nunito Sans;
+        text-align: left;
     }
 
     .kis-widget .kis-widget__cta-block .kis-widget__heading h3, .kis-widget .kis-widget__cta-block .kis-widget__heading span{
