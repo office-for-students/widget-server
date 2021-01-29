@@ -137,7 +137,7 @@ DiscoverUniWidget.prototype = {
 
     handleResponsive: function() {
         if (this.inIframe()) {
-            if (window.innerWidth > window.innerHeight) {
+            if (window.innerWidth > MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH){
                 this.targetDiv.classList.add('horizontal');
             } else {
                 this.targetDiv.classList.add('vertical');

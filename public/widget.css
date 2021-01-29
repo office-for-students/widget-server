@@ -149,17 +149,17 @@
 
 
     .kis-widget.vertical {
-        width: 186px;
+        width: 190px;
         /* This has been removed because if one of the pages in the animation is */
         /* larger than the box it will overflow the box and the border will not */
         /* apear at the bottom any more */
-        /*height: 496px;*/
+        height: 500px;
         flex-direction: column;
     }
 
     .kis-widget.horizontal {
-        width: 611px;
-        height: 146px;
+        width: 615px;
+        height: 150px;
     }
 
     .kis-widget.vertical.responsive, .kis-widget.horizontal.responsive {
