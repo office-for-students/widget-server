@@ -137,17 +137,12 @@ DiscoverUniWidget.prototype = {
 
     handleResponsive: function() {
         if (this.inIframe()) {
-            console.log('this.inIframe');
-            if (window.innerWidth > window.innerHeight) {
+            if (window.innerWidth > MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH){
                 this.targetDiv.classList.add('horizontal');
             } else {
                 this.targetDiv.classList.add('vertical');
             }
         } else {
-            console.log('NOT this.inIframe');
-            console.log('clientWidth: ' + this.targetDiv.clientWidth);
-            console.log('MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH: ' + MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH);
-
             if (this.targetDiv.clientWidth > MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH) {
                 this.targetDiv.classList.add('horizontal');
             } else {
@@ -470,7 +465,7 @@ DataWidget.prototype = {
 
     carousel: function() {
         var i;
-        var slides = document.getElementsByClassName("kis-widget__lead-slide");
+        var slides = this.targetDiv.getElementsByClassName("kis-widget__lead-slide");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
@@ -479,7 +474,7 @@ DataWidget.prototype = {
         if (this.slideIndex > slides.length) {this.slideIndex = 1}
 
         slides[this.slideIndex-1].style.display = "block";
-        setTimeout(this.carousel.bind(this), 4000); // Change image every 4 seconds
+        setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
     }
 }
 
@@ -587,6 +582,7 @@ NoDataWidget.prototype = {
 function init() {
     var widgetTarget = document.getElementsByClassName('kis-widget');
     for (var i = 0; i < widgetTarget.length; i++) {
+        widgetTarget[i].id = "kis-widget_" + (i + 1);
         new DiscoverUniWidget(widgetTarget[i]);
     }
 }

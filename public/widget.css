@@ -10,8 +10,9 @@
     .kis-widget .kis-widget__intro{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: left;
         font-family: Nunito Sans;
+        text-align: left;
     }
 
     .kis-widget .kis-widget__cta-block .kis-widget__heading h3, .kis-widget .kis-widget__cta-block .kis-widget__heading span{
@@ -132,7 +133,7 @@
 
     .kis-widget .kis-widget__lead .kis-widget__title {
         color: #308282;
-        font-size: 48px;
+        font-size: 48px!important;
         font-weight: normal;
         line-height: 57px;
         margin: 0;
@@ -148,17 +149,17 @@
 
 
     .kis-widget.vertical {
-        width: 186px;
+        width: 190px;
         /* This has been removed because if one of the pages in the animation is */
         /* larger than the box it will overflow the box and the border will not */
         /* apear at the bottom any more */
-        /*height: 496px;*/
+        height: 500px;
         flex-direction: column;
     }
 
     .kis-widget.horizontal {
-        width: 611px;
-        height: 146px;
+        width: 615px;
+        height: 150px;
     }
 
     .kis-widget.vertical.responsive, .kis-widget.horizontal.responsive {
