@@ -80,8 +80,8 @@ var CONTENT = {
         'cy-gb': 'Blwyddyn dramor yn ddewisol'
     },
     'dataFor': {
-        'en-gb': 'Data for: ',
-        'cy-gb': 'Data ar gyfer: '
+        'en-gb': 'Data for ',
+        'cy-gb': 'Data ar gyfer '
     },
     'dataForAggregated': {
         'en-gb': 'Data for courses in ',
@@ -90,6 +90,10 @@ var CONTENT = {
     'at': {
         'en-gb': ' at ',
         'cy-gb': ' yn '
+    },
+    'overTwoYears': {
+        'en-gb': 'over two years',
+        'cy-gb': 'dros ddwy flynedd'
     }
 }
 
@@ -197,11 +201,10 @@ DiscoverUniWidget.prototype = {
     renderWidget: function(status, response) {
         if (status === 200) {
             var courseData = JSON.parse(response);
-
-            if (this.hasRequiredStats(courseData) && !this.isMultiSubject(courseData)) {
+            if (this.hasRequiredStats(courseData)) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,
-                                this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
-                                this.generateLink.bind(this));
+                        this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
+                        this.generateLink.bind(this));
             }
             else {
                 new NoDataWidget(this.targetDiv, courseData.course_name, courseData.institution_name, this.language,
@@ -211,10 +214,6 @@ DiscoverUniWidget.prototype = {
             new NoDataWidget(this.targetDiv, "", "", this.language, this.languageKey, this.kismode,
                                 this.generateLink.bind(this));
         }
-    },
-
-    isMultiSubject: function(courseData) {
-        return Boolean(courseData.statistics.nss.length > 1 || courseData.statistics.employment.length > 1);
     },
 
     setOverallSatisfactionStats: function(nssStats) {
@@ -289,7 +288,7 @@ DataWidget.prototype = {
         this.carousel();
     },
 
-    createSlideNode: function(idName, statNode, isNotAggregated) {
+    createSlideNode: function(idName, statNode, aggregation_level) {
         var slideNode = document.createElement('div');
         slideNode.classList.add('kis-widget__lead-slide', 'kis-widget__fade');
         slideNode.id = idName;
@@ -298,7 +297,7 @@ DataWidget.prototype = {
         slideNode.appendChild(slideSurroundNode);
 
         slideSurroundNode.appendChild(statNode);
-        slideSurroundNode.appendChild(this.renderCourseDetails(isNotAggregated));
+        slideSurroundNode.appendChild(this.renderCourseDetails(aggregation_level));
 
         return slideNode;
     },
@@ -330,48 +329,42 @@ DataWidget.prototype = {
     },
 
     renderSatisfactionSlide: function() {
-        var isNotAggregated = this.courseData.statistics.nss[0].aggregation_level === 14 ||
-                                this.courseData.statistics.nss[0].aggregation_level === 24
-
+        var aggregation_level = this.courseData.statistics.nss[0].aggregation_level;
         var percentage = this.courseData.statistics.nss[0].question_27.agree_or_strongly_agree + '%';
         var introText = CONTENT.satisfactionIntro[this.language];
 
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
-        var slideNode = this.createSlideNode('satisfaction', statNode, isNotAggregated);
+        var slideNode = this.createSlideNode('satisfaction', statNode, aggregation_level);
 
         return slideNode;
     },
 
     renderExplanationSlide: function() {
-        var isNotAggregated = this.courseData.statistics.nss[0].aggregation_level === 14 ||
-                                this.courseData.statistics.nss[0].aggregation_level === 24
-
+        var aggregation_level = this.courseData.statistics.nss[0].aggregation_level;
         var percentage = this.courseData.statistics.nss[0].question_1.agree_or_strongly_agree + '%';
         var introText = CONTENT.explanationIntro[this.language];
 
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
-        var slideNode = this.createSlideNode('explanation', statNode, isNotAggregated);
+        var slideNode = this.createSlideNode('explanation', statNode, aggregation_level);
 
         return slideNode;
     },
 
     renderWorkSlide: function() {
-        var isNotAggregated = this.courseData.statistics.employment[0].aggregation_level === 14 ||
-                                this.courseData.statistics.employment[0].aggregation_level === 24
-
+        var aggregation_level = this.courseData.statistics.employment[0].aggregation_level;
         var percentage = this.courseData.statistics.employment[0].in_work_or_study + '%';
         var introText = CONTENT.workIntro[this.language];
 
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
-        var slideNode = this.createSlideNode('work', statNode, isNotAggregated);
+        var slideNode = this.createSlideNode('work', statNode, aggregation_level);
 
         return slideNode;
     },
 
-    renderCourseDetails: function(isNotAggregated)  {
+    renderCourseDetails: function(aggregation_level)  {
         var courseDetailsNode = document.createElement('div');
         courseDetailsNode.classList.add('kis-widget__course-details');
 
@@ -382,11 +375,37 @@ DataWidget.prototype = {
         if (typeof courseName === 'undefined') {
             courseName = this.courseData.course_name['english'];
         }
-        if (isNotAggregated) {
+
+        this.kismode = this.kismode == "FullTime" ? "Full time" : "Part time";
+
+        if (aggregation_level == 14 ){
             courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
-            courseName += this.courseData.title[this.languageKey]
             var dataFor = CONTENT.dataFor[this.language];
-            var course = document.createTextNode(dataFor + courseName);
+            var at = CONTENT.at[this.language];
+            var institution = this.courseData.institution_name[this.languageKey];
+            var course = document.createTextNode(dataFor + courseName + ' (' + this.kismode + ')' + at + institution);
+
+        } else if (aggregation_level == 24) {
+            courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
+            var dataFor = CONTENT.dataFor[this.language];
+            var at = CONTENT.at[this.language];
+            var overTwoYears = CONTENT.overTwoYears[this.language];
+            var institution = this.courseData.institution_name[this.languageKey];
+            var course = document.createTextNode(dataFor + courseName + ' (' + this.kismode + ')' + at + institution + ', ' + overTwoYears);
+
+        } else if (aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23){
+            var dataForAggregated = CONTENT.dataForAggregated[this.language];
+            var at = CONTENT.at[this.language];
+            var institution = this.courseData.institution_name[this.languageKey];
+            var overTwoYears = CONTENT.overTwoYears[this.language];
+            var course = document.createTextNode(dataForAggregated + courseName + ' ' + overTwoYears + at + institution);
+
+        } else if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13){
+            var dataFor = CONTENT.dataForAggregated[this.language];
+            var at = CONTENT.at[this.language];
+            var institution = this.courseData.institution_name[this.languageKey];
+            var course = document.createTextNode(dataFor + courseName + at + institution);
+
         } else {
             var dataFor = CONTENT.dataForAggregated[this.language];
             var at = CONTENT.at[this.language];
@@ -397,23 +416,25 @@ DataWidget.prototype = {
 
         courseDetailsNode.appendChild(courseNode);
 
-        if (isNotAggregated) {
-            var featuresNode = document.createElement("p");
-            featuresNode.classList.add('kis-widget__course');
-            var featureList = [this.kismode];
-            var placementYear = this.courseData.sandwich_year.code;
-            featureList.push(placementYear === 1 ? CONTENT.placementOptional[this.language] :
-                                placementYear === 2 ? CONTENT.placement[this.language] : null)
-            var yearAbroad = this.courseData.sandwich_year.code;
-            featureList.push(yearAbroad === 1 ? CONTENT.abroadOptional[this.language] :
-                                yearAbroad === 2 ? CONTENT.abroad[this.language] : null)
-            var foundationYear = this.courseData.sandwich_year.code;
-            featureList.push(foundationYear === 1 ? CONTENT.foundationOptional[this.language] :
-                                foundationYear === 2 ? CONTENT.foundation[this.language] : null)
-            var features = document.createTextNode(featureList.filter(Boolean).join(', '));
-            featuresNode.appendChild(features);
+        if (aggregation_level == 14 || aggregation_level == 24) {
+            if (this.courseData.sandwich_year) {
+                var featuresNode = document.createElement("p");
+                featuresNode.classList.add('kis-widget__course');
+                var featureList = [this.kismode];
+                var placementYear = this.courseData.sandwich_year.code;
+                featureList.push(placementYear === 1 ? CONTENT.placementOptional[this.language] :
+                    placementYear === 2 ? CONTENT.placement[this.language] : null)
+                var yearAbroad = this.courseData.sandwich_year.code;
+                featureList.push(yearAbroad === 1 ? CONTENT.abroadOptional[this.language] :
+                                    yearAbroad === 2 ? CONTENT.abroad[this.language] : null)
+                var foundationYear = this.courseData.sandwich_year.code;
+                featureList.push(foundationYear === 1 ? CONTENT.foundationOptional[this.language] :
+                    foundationYear === 2 ? CONTENT.foundation[this.language] : null)
+                var features = document.createTextNode(featureList.filter(Boolean).join(', '));
+                featuresNode.appendChild(features);
 
-            courseDetailsNode.appendChild(featuresNode);
+                courseDetailsNode.appendChild(featuresNode);
+            }
         }
 
         return courseDetailsNode;
