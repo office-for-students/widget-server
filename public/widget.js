@@ -81,7 +81,7 @@ var CONTENT = {
     },
     'dataFor': {
         'en-gb': 'Data for ',
-        'cy-gb': 'Data ar gyfer: '
+        'cy-gb': 'Data ar gyfer '
     },
     'dataForAggregated': {
         'en-gb': 'Data for courses in ',
