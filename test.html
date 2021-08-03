@@ -6,38 +6,39 @@
 </head>
 
 <body style="background-color:#f5b649; min-height:2000px">
-    <!-- Manchester: (has two earnings numbers so won't show the statics. Look at Halo ticket 7199) -->
-    <h3>Missing Data Test (responsive)</h3>
-    <div style="min-width:190px;height:auto;" class="kis-widget" data-institution="10007798" data-course="106" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div>
     
     <!-- vertical test -->
-    <h3>Fixed vertical test</h3>
-    <div style="height: 500px; width: 190px;" class="kis-widget" data-institution="10007783" data-course="N400" data-kismode="FullTime" data-orientation="vertical" data-language="en-GB"></div>
+    <h3>Fixed vertical test (nss/empagg = 14)</h3>
+    <div style="width:190px; height:500px;" class="kis-widget" data-institution="10000291" data-course="K00005" data-kismode="FullTime" data-orientation="vertical" data-language="en-GB"></div>
+
+    <!-- vertical test -->
+    <h3>Fixed vertical test (nss/empagg = 21/22/23)</h3>
+    <div style="width:190px; height:500px;" class="kis-widget" data-institution="10000291" data-course="K00239" data-kismode="PartTime" data-orientation="vertical" data-language="en-GB"></div>
 
     <!-- horizontal test -->
-    <h3>Fixed horizontal test</h3>
-   <div style="height: 150px; width: 615px;" class="kis-widget" data-institution="10007814" data-course="UFBSACCA" data-kismode="FullTime" data-orientation="horizontal" data-language="en-GB"></div>
+    <h3>Fixed horizontal test (nss/empagg = 11/12/13)</h3>
+   <div style="width:615px; height:150px;" class="kis-widget" data-institution="10000291" data-course="K00032" data-kismode="FullTime" data-orientation="horizontal" data-language="en-GB"></div>
    
     <!-- responsive test -->
     <!-- minimum width for responsive item is 190 (height must be auto and not fixed) -->
-    <h3>Responsive test</h3>
-    <div style="min-width:190px;height:auto;" class="kis-widget" data-institution="10007783" data-course="N400" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div>
+    <h3>Responsive test (nss/empagg = 24)</h3>
+    <div style="min-width:190px;" class="kis-widget" data-institution="10000571" data-course="BA-BMHRM" data-kismode="FullTime" data-orientation="responsive" data-language="en-GB"></div>
   
 
     <h3>Responsive iframe test</h3>
     <iframe id="unistats-widget-frame" title="Unistats KIS Widget"
     src="http://localhost:8001/widget/10007855/BSHS4XSSCSCS/responsive/small/en-GB/FullTime"
-    scrolling="no" style="overflow: hidden; border: 0px none transparent; min-width: 194px; min-height: 155px;width:100%;"></iframe>
+    scrolling="no" style="overflow: hidden; border: 0px none transparent; min-width: 194px; min-height: 155px; width:100%;"></iframe>
 
     <h3>Fixed vertical iframe test</h3>
     <iframe id="unistats-widget-frame" title="Unistats KIS Widget"
     src="http://localhost:8001/widget/10007855/BSHS4XSSCSCS/vertical/small/en-GB/FullTime"
-    scrolling="no"style="overflow: hidden; border: 0px none transparent; width: 194px; height:500px;"></iframe>
+    scrolling="no" style="border: 0px none transparent; width: 198px; height:508px;"></iframe>
 
     <h3>Fixed horizontal iframe test</h3>
     <iframe id="unistats-widget-frame" title="Unistats KIS Widget"
     src="http://localhost:8001/widget/10007855/BSHS4XSSCSCS/horizontal/small/en-GB/FullTime"
-    scrolling="no"style="overflow: hidden; border: 0px none transparent; width: 619px; height:154px;"></iframe>
+    scrolling="no" style="border: 0px none transparent; width: 624px; height:158px;"></iframe>
 
     <script>
         (function (d) {
