@@ -376,7 +376,11 @@ DataWidget.prototype = {
             courseName = this.courseData.course_name['english'];
         }
 
-        this.kismode = this.kismode == "FullTime" ? "Full time" : "Part time";
+        if (this.kismode == "PartTime" || this.kismode == "Parttime") {
+            this.kismode = "Part time";
+        } else {
+            this.kismode = "Full time";
+        }
 
         if (aggregation_level == 14 ){
             courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
