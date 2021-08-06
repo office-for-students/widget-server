@@ -94,6 +94,14 @@ var CONTENT = {
     'overTwoYears': {
         'en-gb': 'over two years',
         'cy-gb': 'dros ddwy flynedd'
+    },
+    'FullTime': {
+        'en-gb': 'Full time',
+        'cy-gb': 'Llawn-amser'
+    },
+    'PartTime': {
+        'en-gb': 'Part time',
+        'cy-gb': 'Rhan-amser'
     }
 }
 
@@ -288,7 +296,7 @@ DataWidget.prototype = {
         this.carousel();
     },
 
-    createSlideNode: function(idName, statNode, aggregation_level) {
+    createSlideNode: function(idName, statNode, aggregation_level, subject, courseName) {
         var slideNode = document.createElement('div');
         slideNode.classList.add('kis-widget__lead-slide', 'kis-widget__fade');
         slideNode.id = idName;
@@ -297,7 +305,7 @@ DataWidget.prototype = {
         slideNode.appendChild(slideSurroundNode);
 
         slideSurroundNode.appendChild(statNode);
-        slideSurroundNode.appendChild(this.renderCourseDetails(aggregation_level));
+        slideSurroundNode.appendChild(this.renderCourseDetails(aggregation_level, subject, courseName));
 
         return slideNode;
     },
@@ -330,53 +338,92 @@ DataWidget.prototype = {
 
     renderSatisfactionSlide: function() {
         var aggregation_level = this.courseData.statistics.nss[0].aggregation_level;
+        var courseName = this.courseData.course_name[this.languageKey];
+        if (typeof courseName === 'undefined') {
+            courseName = this.courseData.course_name['english'];
+        }
+        if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13 || aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23) {
+            if (this.language == "cy-gb") {
+                var subject = this.courseData.statistics.nss[0].subject.welsh_label;
+            } else {
+                var subject = this.courseData.statistics.nss[0].subject.english_label;
+            }
+        } else {
+            var subject = courseName;
+        }
         var percentage = this.courseData.statistics.nss[0].question_27.agree_or_strongly_agree + '%';
         var introText = CONTENT.satisfactionIntro[this.language];
 
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
-        var slideNode = this.createSlideNode('satisfaction', statNode, aggregation_level);
+        var slideNode = this.createSlideNode('satisfaction', statNode, aggregation_level, subject, courseName);
 
         return slideNode;
     },
 
     renderExplanationSlide: function() {
         var aggregation_level = this.courseData.statistics.nss[0].aggregation_level;
+        var courseName = this.courseData.course_name[this.languageKey];
+        if (typeof courseName === 'undefined') {
+            courseName = this.courseData.course_name['english'];
+        }
+        if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13 || aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23) {
+            if (this.language == "cy-gb") {
+                var subject = this.courseData.statistics.nss[0].subject.welsh_label;
+            } else {
+                var subject = this.courseData.statistics.nss[0].subject.english_label;
+            }
+        } else {
+            var subject = courseName;
+        }
         var percentage = this.courseData.statistics.nss[0].question_1.agree_or_strongly_agree + '%';
         var introText = CONTENT.explanationIntro[this.language];
 
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
-        var slideNode = this.createSlideNode('explanation', statNode, aggregation_level);
+        var slideNode = this.createSlideNode('explanation', statNode, aggregation_level, subject, courseName);
 
         return slideNode;
     },
 
     renderWorkSlide: function() {
         var aggregation_level = this.courseData.statistics.employment[0].aggregation_level;
+        var courseName = this.courseData.course_name[this.languageKey];
+        if (typeof courseName === 'undefined') {
+            courseName = this.courseData.course_name['english'];
+        }
+        if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13 || aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23) {
+            if (this.language == "cy-gb") {
+                var subject = this.courseData.statistics.employment[0].subject.welsh_label;
+            } else {
+                var subject = this.courseData.statistics.employment[0].subject.english_label;
+            }
+        } else {
+            var subject = courseName;
+        }
         var percentage = this.courseData.statistics.employment[0].in_work_or_study + '%';
         var introText = CONTENT.workIntro[this.language];
 
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
-        var slideNode = this.createSlideNode('work', statNode, aggregation_level);
+        var slideNode = this.createSlideNode('work', statNode, aggregation_level, subject, courseName);
 
         return slideNode;
     },
 
-    renderCourseDetails: function(aggregation_level)  {
+    renderCourseDetails: function(aggregation_level, subject, courseName)  {
         var courseDetailsNode = document.createElement('div');
         courseDetailsNode.classList.add('kis-widget__course-details');
 
         var courseNode = document.createElement("p");
         courseNode.classList.add('kis-widget__course');
 
-        var courseName = this.courseData.course_name[this.languageKey];
-        if (typeof courseName === 'undefined') {
-            courseName = this.courseData.course_name['english'];
-        }
 
-        this.kismode = this.kismode == "FullTime" ? "Full time" : "Part time";
+        if (this.kismode == "Parttime" || this.kismode == "PartTime") {
+            this.kismode = CONTENT.PartTime[this.language];
+        } else {
+            this.kismode = CONTENT.FullTime[this.language];
+        }
 
         if (aggregation_level == 14 ){
             courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
@@ -393,18 +440,18 @@ DataWidget.prototype = {
             var institution = this.courseData.institution_name[this.languageKey];
             var course = document.createTextNode(dataFor + courseName + ' (' + this.kismode + ')' + at + institution + ', ' + overTwoYears);
 
-        } else if (aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23){
+        } else if (aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23) {
             var dataForAggregated = CONTENT.dataForAggregated[this.language];
             var at = CONTENT.at[this.language];
             var institution = this.courseData.institution_name[this.languageKey];
             var overTwoYears = CONTENT.overTwoYears[this.language];
-            var course = document.createTextNode(dataForAggregated + courseName + ' ' + overTwoYears + at + institution);
+            var course = document.createTextNode(dataForAggregated + subject + ' ' + overTwoYears + at + institution);
 
-        } else if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13){
+        } else if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13) {
             var dataFor = CONTENT.dataForAggregated[this.language];
             var at = CONTENT.at[this.language];
             var institution = this.courseData.institution_name[this.languageKey];
-            var course = document.createTextNode(dataFor + courseName + at + institution);
+            var course = document.createTextNode(dataFor + subject + at + institution);
 
         } else {
             var dataFor = CONTENT.dataForAggregated[this.language];
