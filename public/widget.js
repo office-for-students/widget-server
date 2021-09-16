@@ -305,7 +305,7 @@ DataWidget.prototype = {
         slideNode.appendChild(slideSurroundNode);
 
         slideSurroundNode.appendChild(statNode);
-        slideSurroundNode.appendChild(this.renderCourseDetails(aggregation_level, subject, courseName));
+        slideSurroundNode.appendChild(this.renderCourseDetails(aggregation_level, subject, courseName, idName));
 
         return slideNode;
     },
@@ -411,13 +411,24 @@ DataWidget.prototype = {
         return slideNode;
     },
 
-    renderCourseDetails: function(aggregation_level, subject, courseName)  {
+    renderCourseDetails: function(aggregation_level, subject, courseName, idName)  {
         var courseDetailsNode = document.createElement('div');
         courseDetailsNode.classList.add('kis-widget__course-details');
 
         var courseNode = document.createElement("p");
         courseNode.classList.add('kis-widget__course');
 
+        const dataFor = CONTENT.dataFor[this.language];
+        const dataForAggregated = CONTENT.dataForAggregated[this.language];
+        const at = CONTENT.at[this.language];
+        const institution = this.courseData.institution_name[this.languageKey];
+        let overTwoYears = CONTENT.overTwoYears[this.language];
+        // TODO: remove below if condition when "over two years" override is to be disabled.
+        //  Can also change the above let to const.
+        if(idName === "work"){
+            overTwoYears = ""
+        }
+        // end remove
 
         if (this.kismode == "Parttime" || this.kismode == "PartTime") {
             this.kismode = CONTENT.PartTime[this.language];
@@ -427,37 +438,20 @@ DataWidget.prototype = {
 
         if (aggregation_level == 14 ){
             courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
-            var dataFor = CONTENT.dataFor[this.language];
-            var at = CONTENT.at[this.language];
-            var institution = this.courseData.institution_name[this.languageKey];
             var course = document.createTextNode(dataFor + courseName + ' (' + this.kismode + ')' + at + institution);
 
         } else if (aggregation_level == 24) {
             courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
-            var dataFor = CONTENT.dataFor[this.language];
-            var at = CONTENT.at[this.language];
-            var overTwoYears = CONTENT.overTwoYears[this.language];
-            var institution = this.courseData.institution_name[this.languageKey];
             var course = document.createTextNode(dataFor + courseName + ' (' + this.kismode + ')' + at + institution + ', ' + overTwoYears);
 
         } else if (aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23) {
-            var dataForAggregated = CONTENT.dataForAggregated[this.language];
-            var at = CONTENT.at[this.language];
-            var institution = this.courseData.institution_name[this.languageKey];
-            var overTwoYears = CONTENT.overTwoYears[this.language];
             var course = document.createTextNode(dataForAggregated + subject + ' ' + overTwoYears + at + institution);
 
         } else if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13) {
-            var dataFor = CONTENT.dataForAggregated[this.language];
-            var at = CONTENT.at[this.language];
-            var institution = this.courseData.institution_name[this.languageKey];
-            var course = document.createTextNode(dataFor + subject + at + institution);
+            var course = document.createTextNode(dataForAggregated + subject + at + institution);
 
         } else {
-            var dataFor = CONTENT.dataForAggregated[this.language];
-            var at = CONTENT.at[this.language];
-            var institution = this.courseData.institution_name[this.languageKey];
-            var course = document.createTextNode(dataFor + courseName + at + institution);
+            var course = document.createTextNode(dataForAggregated + courseName + at + institution);
         }
         courseNode.appendChild(course);
 
