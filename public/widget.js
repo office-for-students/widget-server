@@ -20,8 +20,8 @@ var CONTENT = {
         'cy-gb': 'fwy'
     },
     'ctaLead3': {
-        'en-gb': ' official course information visit.',
-        'cy-gb': ' o wybodaeth swyddogol am y cwrs, ewch i'
+        'en-gb': ' official course information visit Discover Uni',
+        'cy-gb': ' o wybodaeth swyddogol am y cwrs, ewch i Darganfod Prifysgol'
     },
     'logo': {
         'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
@@ -513,7 +513,7 @@ DataWidget.prototype = {
         var logoNode = document.createElement('img');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
-        logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
+        //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
@@ -629,7 +629,7 @@ NoDataWidget.prototype = {
         var logoNode = document.createElement('img');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
-        logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
+        //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
