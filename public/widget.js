@@ -542,7 +542,19 @@ DataWidget.prototype = {
         if (this.slideIndex > slides.length) {this.slideIndex = 1}
 
         slides[this.slideIndex-1].style.display = "block";
-        setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
+
+        let allSlides = document.getElementsByClassName("kis-widget__lead");
+        for (let slide of allSlides){
+            slide.addEventListener("mouseenter", () => {
+                clearInterval(interval);
+            })
+            slide.addEventListener("mouseleave", () => {
+                interval = setInterval(this.carousel.bind(this), 5000);
+            })
+        }
+
+        let interval = setInterval(this.carousel.bind(this), 5000); // Change image every 5 seconds
+
     }
 }
 
