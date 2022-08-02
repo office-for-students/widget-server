@@ -15,7 +15,7 @@
         text-align: left;
     }
 
-    .kis-widget .kis-widget__cta-block .kis-widget__heading h3, .kis-widget .kis-widget__cta-block .kis-widget__heading span{
+    .kis-widget .kis-widget__cta-block .kis-widget__heading h3, .kis-widget__heading h1, .kis-widget .kis-widget__cta-block .kis-widget__heading span{
         color:white;
         font-size:0.95rem;
         line-height: 1.5rem;
@@ -39,7 +39,7 @@
     }
     
 
-    .kis-widget.horizontal .kis-widget__heading .kis-widget__cta-block .kis-widget__heading h3, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading span, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading strong{
+    .kis-widget.horizontal .kis-widget__heading .kis-widget__cta-block .kis-widget__heading h3, .kis-widget__heading h1, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading span, .kis-widget.horizontal .kis-widget__cta-block .kis-widget__heading strong{
         margin:0;
         font-size:0.95rem;
         line-height: 1.5rem;
@@ -125,7 +125,7 @@
         font-family: Nunito Sans;
     }
 
-    .kis-widget .kis-widget__cta-block h3 {
+    .kis-widget .kis-widget__cta-block h3, .kis-widget__cta-block h1 {
         line-height: 16px;
         font-weight: normal;
         margin: 0px;

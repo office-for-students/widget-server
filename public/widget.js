@@ -321,7 +321,7 @@ DataWidget.prototype = {
     },
 
     createTitleNode: function(titleText) {
-        var titleNode = document.createElement('h3');
+        var titleNode = document.createElement('h1');
         titleNode.classList.add('kis-widget__title');
         var title = document.createTextNode(titleText);
         titleNode.appendChild(title);
@@ -329,7 +329,7 @@ DataWidget.prototype = {
     },
 
     createIntroNode: function(introText) {
-        var introNode = document.createElement("p");
+        var introNode = document.createElement("h1");
         introNode.classList.add('kis-widget__intro');
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
@@ -568,7 +568,7 @@ NoDataWidget.prototype = {
         leadNode.classList.add('kis-widget__lead');
 
         if (typeof this.courseName[this.languageKey] !== 'undefined' && typeof this.institutionName[this.languageKey] !== 'undefined') {
-            var courseNode = document.createElement("p");
+            var courseNode = document.createElement("h1");
             courseNode.classList.add('kis-widget__intro');
 
             var courseName = this.courseName[this.languageKey];
@@ -579,7 +579,7 @@ NoDataWidget.prototype = {
             courseNode.appendChild(course);
             leadNode.appendChild(courseNode);
         } else {
-            var courseNode = document.createElement("p");
+            var courseNode = document.createElement("h1");
             courseNode.classList.add('kis-widget__intro');
             courseName = this.courseName['english'];
             var at = CONTENT.at['en-gb']
