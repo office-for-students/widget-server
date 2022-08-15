@@ -329,7 +329,7 @@ DataWidget.prototype = {
     },
 
     createIntroNode: function(introText) {
-        var introNode = document.createElement("h1");
+        var introNode = document.createElement("h2");
         introNode.classList.add('kis-widget__intro');
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
