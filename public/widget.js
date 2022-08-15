@@ -357,7 +357,7 @@ DataWidget.prototype = {
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
         var slideNode = this.createSlideNode('satisfaction', statNode, aggregation_level, subject, courseName);
-
+        slideNode.ariaLabel = `${percentage} ${introText}`
         return slideNode;
     },
 
@@ -382,7 +382,7 @@ DataWidget.prototype = {
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
         var slideNode = this.createSlideNode('explanation', statNode, aggregation_level, subject, courseName);
-
+        slideNode.ariaLabel = `${percentage} ${introText}`
         return slideNode;
     },
 
@@ -407,7 +407,7 @@ DataWidget.prototype = {
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
         var slideNode = this.createSlideNode('work', statNode, aggregation_level, subject, courseName);
-
+        slideNode.ariaLabel = `${percentage} ${introText}`
         return slideNode;
     },
 
@@ -462,6 +462,7 @@ DataWidget.prototype = {
         courseNode.appendChild(course);
 
         courseDetailsNode.appendChild(courseNode);
+        courseDetailsNode.ariaLabel = `${courseNode.innerHTML}`
 
         if (aggregation_level == 14 || aggregation_level == 24) {
             if (this.courseData.sandwich_year) {
@@ -527,8 +528,10 @@ DataWidget.prototype = {
         ctaWrapperNode.appendChild(ctaNode);
         ctaNode.appendChild(cta);
         ctaBlockNode.appendChild(ctaWrapperNode);
+        ctaBlockNode.ariaLabel = `${leadNode1.innerHTML} ${leadNode2.innerHTML} ${leadNode3.innerHTML}`;
 
         this.targetDiv.appendChild(ctaBlockNode);
+
     },
 
     carousel: function() {
