@@ -20,8 +20,8 @@ var CONTENT = {
         'cy-gb': 'fwy'
     },
     'ctaLead3': {
-        'en-gb': ' official course information visit.',
-        'cy-gb': ' o wybodaeth swyddogol am y cwrs, ewch i'
+        'en-gb': ' official course information visit Discover Uni',
+        'cy-gb': ' o wybodaeth swyddogol am y cwrs, ewch i Darganfod Prifysgol'
     },
     'logo': {
         'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
@@ -321,7 +321,7 @@ DataWidget.prototype = {
     },
 
     createTitleNode: function(titleText) {
-        var titleNode = document.createElement('h3');
+        var titleNode = document.createElement('h1');
         titleNode.classList.add('kis-widget__title');
         var title = document.createTextNode(titleText);
         titleNode.appendChild(title);
@@ -329,7 +329,7 @@ DataWidget.prototype = {
     },
 
     createIntroNode: function(introText) {
-        var introNode = document.createElement("p");
+        var introNode = document.createElement("h2");
         introNode.classList.add('kis-widget__intro');
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
@@ -357,7 +357,7 @@ DataWidget.prototype = {
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
         var slideNode = this.createSlideNode('satisfaction', statNode, aggregation_level, subject, courseName);
-
+        slideNode.ariaLabel = `${percentage} ${introText}`
         return slideNode;
     },
 
@@ -382,7 +382,7 @@ DataWidget.prototype = {
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
         var slideNode = this.createSlideNode('explanation', statNode, aggregation_level, subject, courseName);
-
+        slideNode.ariaLabel = `${percentage} ${introText}`
         return slideNode;
     },
 
@@ -407,7 +407,7 @@ DataWidget.prototype = {
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
         var slideNode = this.createSlideNode('work', statNode, aggregation_level, subject, courseName);
-
+        slideNode.ariaLabel = `${percentage} ${introText}`
         return slideNode;
     },
 
@@ -462,6 +462,7 @@ DataWidget.prototype = {
         courseNode.appendChild(course);
 
         courseDetailsNode.appendChild(courseNode);
+        courseDetailsNode.ariaLabel = `${courseNode.innerHTML}`
 
         if (aggregation_level == 14 || aggregation_level == 24) {
             if (this.courseData.sandwich_year) {
@@ -513,7 +514,7 @@ DataWidget.prototype = {
         var logoNode = document.createElement('img');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
-        logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
+        //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
@@ -527,8 +528,10 @@ DataWidget.prototype = {
         ctaWrapperNode.appendChild(ctaNode);
         ctaNode.appendChild(cta);
         ctaBlockNode.appendChild(ctaWrapperNode);
+        ctaBlockNode.ariaLabel = `${leadNode1.innerHTML} ${leadNode2.innerHTML} ${leadNode3.innerHTML}`;
 
         this.targetDiv.appendChild(ctaBlockNode);
+
     },
 
     carousel: function() {
@@ -542,7 +545,19 @@ DataWidget.prototype = {
         if (this.slideIndex > slides.length) {this.slideIndex = 1}
 
         slides[this.slideIndex-1].style.display = "block";
-        setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
+
+        let allSlides = document.getElementsByClassName("kis-widget__lead");
+        for (let slide of allSlides){
+            slide.addEventListener("mouseenter", () => {
+                clearInterval(interval);
+            })
+            slide.addEventListener("mouseleave", () => {
+                interval = setInterval(this.carousel.bind(this), 5000);
+            })
+        }
+
+        let interval = setInterval(this.carousel.bind(this), 5000); // Change image every 5 seconds
+
     }
 }
 
@@ -568,7 +583,7 @@ NoDataWidget.prototype = {
         leadNode.classList.add('kis-widget__lead');
 
         if (typeof this.courseName[this.languageKey] !== 'undefined' && typeof this.institutionName[this.languageKey] !== 'undefined') {
-            var courseNode = document.createElement("p");
+            var courseNode = document.createElement("h1");
             courseNode.classList.add('kis-widget__intro');
 
             var courseName = this.courseName[this.languageKey];
@@ -579,7 +594,7 @@ NoDataWidget.prototype = {
             courseNode.appendChild(course);
             leadNode.appendChild(courseNode);
         } else {
-            var courseNode = document.createElement("p");
+            var courseNode = document.createElement("h1");
             courseNode.classList.add('kis-widget__intro');
             courseName = this.courseName['english'];
             var at = CONTENT.at['en-gb']
@@ -629,7 +644,7 @@ NoDataWidget.prototype = {
         var logoNode = document.createElement('img');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
-        logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
+        //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
