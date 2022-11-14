@@ -534,30 +534,31 @@ DataWidget.prototype = {
 
     },
 
-    carousel: function() {
-        var i;
-        var slides = this.targetDiv.getElementsByClassName("kis-widget__lead-slide");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+    carousel: function () {
+
+        let slides = this.targetDiv.getElementsByClassName("kis-widget__lead-slide");
+
+        for (let slide of slides) {
+            slide.style.display = "none";
         }
 
         this.slideIndex++;
-        if (this.slideIndex > slides.length) {this.slideIndex = 1}
-
-        slides[this.slideIndex-1].style.display = "block";
-
-        let allSlides = document.getElementsByClassName("kis-widget__lead");
-        for (let slide of allSlides){
-            slide.addEventListener("mouseenter", () => {
-                clearInterval(interval);
-            })
-            slide.addEventListener("mouseleave", () => {
-                interval = setInterval(this.carousel.bind(this), 5000);
-            })
+        if (this.slideIndex >= slides.length) {
+            this.slideIndex = 0
         }
 
-        let interval = setInterval(this.carousel.bind(this), 5000); // Change image every 5 seconds
+        slides[this.slideIndex].style.display = "block"
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
+        let allSlides = document.getElementById("kis-widget_1");
 
+        allSlides.addEventListener("mouseenter", () => {
+            clearTimeout(this.timeout);
+        })
+        allSlides.addEventListener("mouseleave", () => {
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(this.carousel.bind(this), 5000);
+        })
     }
 }
 
