@@ -1,7 +1,7 @@
 var CONTENT = {
     'satisfactionIntro': {
         'en-gb': 'of students were satisfied overall with their course.',
-        'cy-gb':"cyfran y myfyrwyr a oedd yn fodlon â'u cwrs ar y cyfan."
+        'cy-gb': "cyfran y myfyrwyr a oedd yn fodlon â'u cwrs ar y cyfan."
     },
     'explanationIntro': {
         'en-gb': 'of students agreed staff were good at explaining things.',
@@ -123,13 +123,13 @@ var LANGUAGE_KEYS = {
 
 var MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH = 614;
 
-var  DiscoverUniWidget = function(targetDiv) {
+var DiscoverUniWidget = function (targetDiv) {
     this.targetDiv = targetDiv;
     this.setup();
 }
 
 DiscoverUniWidget.prototype = {
-    setup: function() {
+    setup: function () {
         this.institution = this.targetDiv.dataset.institution;
         this.course = this.targetDiv.dataset.course;
         this.kismode = this.targetDiv.dataset.kismode ? MODE_KEYS[this.targetDiv.dataset.kismode.toLowerCase()] : 'FullTime';
@@ -147,9 +147,9 @@ DiscoverUniWidget.prototype = {
         this.loadCourseData();
     },
 
-    handleResponsive: function() {
+    handleResponsive: function () {
         if (this.inIframe()) {
-            if (window.innerWidth > MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH){
+            if (window.innerWidth > MINIMUM_RESPONSIVE_HORIZONTAL_WIDTH) {
                 this.targetDiv.classList.add('horizontal');
             } else {
                 this.targetDiv.classList.add('vertical');
@@ -163,7 +163,7 @@ DiscoverUniWidget.prototype = {
         }
     },
 
-    inIframe: function() {
+    inIframe: function () {
         try {
             return window.location !== window.parent.location;
         } catch (e) {
@@ -171,7 +171,7 @@ DiscoverUniWidget.prototype = {
         }
     },
 
-    addCss: function() {
+    addCss: function () {
         var logoFontNode = document.createElement('link');
         logoFontNode.href = "https://fonts.googleapis.com/css?family=Montserrat:regular,bold&display=swap";
         logoFontNode.rel = "stylesheet";
@@ -190,10 +190,10 @@ DiscoverUniWidget.prototype = {
         widgetScript.parentNode.insertBefore(generalFontNode, widgetScript);
     },
 
-    loadCourseData: function() {
+    loadCourseData: function () {
         var that = this;
         var xhttp = new XMLHttpRequest();
-        xhttp.addEventListener("load", function() {
+        xhttp.addEventListener("load", function () {
             that.renderWidget(this.status, this.response);
         });
         base_url = "{{api_domain}}/institutions/{{uni_id}}/courses/{{course_id}}/modes/{{mode}}";
@@ -206,37 +206,36 @@ DiscoverUniWidget.prototype = {
         xhttp.send();
     },
 
-    renderWidget: function(status, response) {
+    renderWidget: function (status, response) {
         if (status === 200) {
             var courseData = JSON.parse(response);
             if (this.hasRequiredStats(courseData)) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,
-                        this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
-                        this.generateLink.bind(this));
-            }
-            else {
+                    this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
+                    this.generateLink.bind(this));
+            } else {
                 new NoDataWidget(this.targetDiv, courseData.course_name, courseData.institution_name, this.language,
-                this.languageKey, this.kismode, this.generateLink.bind(this));
+                    this.languageKey, this.kismode, this.generateLink.bind(this));
             }
         } else {
             new NoDataWidget(this.targetDiv, "", "", this.language, this.languageKey, this.kismode,
-                                this.generateLink.bind(this));
+                this.generateLink.bind(this));
         }
     },
 
-    setOverallSatisfactionStats: function(nssStats) {
+    setOverallSatisfactionStats: function (nssStats) {
         this.hasOverallSatisfactionStats = Boolean(nssStats && nssStats[0] && nssStats[0].question_1);
     },
 
-    setTeachingSatisfactionStats: function(nssStats) {
+    setTeachingSatisfactionStats: function (nssStats) {
         this.hasTeachingSatisfactionStats = Boolean(nssStats && nssStats[0] && nssStats[0].question_27);
     },
 
-    setWorkStats: function(workStats) {
+    setWorkStats: function (workStats) {
         this.hasWorkStats = Boolean(workStats && workStats[0] && workStats[0].in_work_or_study);
     },
 
-    hasRequiredStats: function(courseData) {
+    hasRequiredStats: function (courseData) {
         this.setOverallSatisfactionStats(courseData.statistics.nss)
         this.setTeachingSatisfactionStats(courseData.statistics.nss)
         this.setWorkStats(courseData.statistics.employment)
@@ -244,10 +243,10 @@ DiscoverUniWidget.prototype = {
             Boolean(this.hasOverallSatisfactionStats || this.hasTeachingSatisfactionStats || this.hasWorkStats));
     },
 
-    generateLink: function() {
+    generateLink: function () {
         var base_domain = '{{domain_name}}';
         if (this.languageKey === 'welsh') {
-            base_domain +=  '/cy';
+            base_domain += '/cy';
         }
         coursePageBase = '{{base_domain}}/course-details/{{uni_id}}/{{course_id}}/{{mode}}/';
         coursePage = coursePageBase.replace('{{base_domain}}', base_domain);
@@ -258,13 +257,13 @@ DiscoverUniWidget.prototype = {
     }
 }
 
-var DataWidget = function(targetDiv, courseData, language, languageKey, kismode, hasOverall, hasTeaching, hasWork,
-                            generateLink) {
+var DataWidget = function (targetDiv, courseData, language, languageKey, kismode, hasOverall, hasTeaching, hasWork,
+                           generateLink) {
     this.targetDiv = targetDiv;
     this.courseData = courseData
     this.language = language;
-    this.languageKey= languageKey;
-    this.kismode =  kismode;
+    this.languageKey = languageKey;
+    this.kismode = kismode;
     this.hasOverall = hasOverall;
     this.hasTeaching = hasTeaching;
     this.hasWork = hasWork;
@@ -273,13 +272,14 @@ var DataWidget = function(targetDiv, courseData, language, languageKey, kismode,
 }
 
 DataWidget.prototype = {
-    setup: function() {
+    setup: function () {
         this.slideIndex = 0;
+        this.timeout = 0;
         this.renderDataLead();
         this.renderCTABlock();
     },
 
-    renderDataLead: function() {
+    renderDataLead: function () {
         var leadNode = document.createElement('div');
         leadNode.classList.add('kis-widget__lead');
         if (this.hasOverall) {
@@ -296,7 +296,7 @@ DataWidget.prototype = {
         this.carousel();
     },
 
-    createSlideNode: function(idName, statNode, aggregation_level, subject, courseName) {
+    createSlideNode: function (idName, statNode, aggregation_level, subject, courseName) {
         var slideNode = document.createElement('div');
         slideNode.classList.add('kis-widget__lead-slide', 'kis-widget__fade');
         slideNode.id = idName;
@@ -310,7 +310,7 @@ DataWidget.prototype = {
         return slideNode;
     },
 
-    createStatNode: function(titleNode, introNode) {
+    createStatNode: function (titleNode, introNode) {
         var statNode = document.createElement('div');
         statNode.classList.add('kis-widget__stat');
 
@@ -320,7 +320,7 @@ DataWidget.prototype = {
         return statNode;
     },
 
-    createTitleNode: function(titleText) {
+    createTitleNode: function (titleText) {
         var titleNode = document.createElement('h1');
         titleNode.classList.add('kis-widget__title');
         var title = document.createTextNode(titleText);
@@ -328,7 +328,7 @@ DataWidget.prototype = {
         return titleNode;
     },
 
-    createIntroNode: function(introText) {
+    createIntroNode: function (introText) {
         var introNode = document.createElement("h2");
         introNode.classList.add('kis-widget__intro');
         var intro = document.createTextNode(introText);
@@ -336,7 +336,7 @@ DataWidget.prototype = {
         return introNode;
     },
 
-    renderSatisfactionSlide: function() {
+    renderSatisfactionSlide: function () {
         var aggregation_level = this.courseData.statistics.nss[0].aggregation_level;
         var courseName = this.courseData.course_name[this.languageKey];
         if (typeof courseName === 'undefined') {
@@ -361,7 +361,7 @@ DataWidget.prototype = {
         return slideNode;
     },
 
-    renderExplanationSlide: function() {
+    renderExplanationSlide: function () {
         var aggregation_level = this.courseData.statistics.nss[0].aggregation_level;
         var courseName = this.courseData.course_name[this.languageKey];
         if (typeof courseName === 'undefined') {
@@ -386,7 +386,7 @@ DataWidget.prototype = {
         return slideNode;
     },
 
-    renderWorkSlide: function() {
+    renderWorkSlide: function () {
         var aggregation_level = this.courseData.statistics.employment[0].aggregation_level;
         var courseName = this.courseData.course_name[this.languageKey];
         if (typeof courseName === 'undefined') {
@@ -411,7 +411,7 @@ DataWidget.prototype = {
         return slideNode;
     },
 
-    renderCourseDetails: function(aggregation_level, subject, courseName)  {
+    renderCourseDetails: function (aggregation_level, subject, courseName) {
         var courseDetailsNode = document.createElement('div');
         courseDetailsNode.classList.add('kis-widget__course-details');
 
@@ -425,7 +425,7 @@ DataWidget.prototype = {
             this.kismode = CONTENT.FullTime[this.language];
         }
 
-        if (aggregation_level == 14 ){
+        if (aggregation_level == 14) {
             courseName += this.courseData.honours_award_provision === 1 ? ' (Hons) ' : ' ';
             var dataFor = CONTENT.dataFor[this.language];
             var at = CONTENT.at[this.language];
@@ -474,7 +474,7 @@ DataWidget.prototype = {
                     placementYear === 2 ? CONTENT.placement[this.language] : null)
                 var yearAbroad = this.courseData.sandwich_year.code;
                 featureList.push(yearAbroad === 1 ? CONTENT.abroadOptional[this.language] :
-                                    yearAbroad === 2 ? CONTENT.abroad[this.language] : null)
+                    yearAbroad === 2 ? CONTENT.abroad[this.language] : null)
                 var foundationYear = this.courseData.sandwich_year.code;
                 featureList.push(foundationYear === 1 ? CONTENT.foundationOptional[this.language] :
                     foundationYear === 2 ? CONTENT.foundation[this.language] : null)
@@ -488,7 +488,7 @@ DataWidget.prototype = {
         return courseDetailsNode;
     },
 
-    renderCTABlock: function() {
+    renderCTABlock: function () {
         var ctaBlockNode = document.createElement('div');
         ctaBlockNode.classList.add('kis-widget__cta-block');
         var headingNode = document.createElement('h3');
@@ -534,51 +534,52 @@ DataWidget.prototype = {
 
     },
 
-    carousel: function() {
-        var i;
-        var slides = this.targetDiv.getElementsByClassName("kis-widget__lead-slide");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+    carousel: function () {
+
+        let slides = this.targetDiv.getElementsByClassName("kis-widget__lead-slide");
+
+        for (let slide of slides) {
+            slide.style.display = "none";
         }
 
         this.slideIndex++;
-        if (this.slideIndex > slides.length) {this.slideIndex = 1}
-
-        slides[this.slideIndex-1].style.display = "block";
-
-        let allSlides = document.getElementsByClassName("kis-widget__lead");
-        for (let slide of allSlides){
-            slide.addEventListener("mouseenter", () => {
-                clearInterval(interval);
-            })
-            slide.addEventListener("mouseleave", () => {
-                interval = setInterval(this.carousel.bind(this), 5000);
-            })
+        if (this.slideIndex >= slides.length) {
+            this.slideIndex = 0
         }
 
-        let interval = setInterval(this.carousel.bind(this), 5000); // Change image every 5 seconds
+        slides[this.slideIndex].style.display = "block"
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
+        let allSlides = document.getElementById("kis-widget_1");
 
+        allSlides.addEventListener("mouseenter", () => {
+            clearTimeout(this.timeout);
+        })
+        allSlides.addEventListener("mouseleave", () => {
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(this.carousel.bind(this), 5000);
+        })
     }
 }
 
-var NoDataWidget = function(targetDiv, courseName, institutionName ,language, languageKey, kismode, generateLink) {
+var NoDataWidget = function (targetDiv, courseName, institutionName, language, languageKey, kismode, generateLink) {
     this.targetDiv = targetDiv;
     this.courseName = courseName;
     this.institutionName = institutionName;
     this.language = language;
-    this.languageKey= languageKey;
-    this.kismode =  kismode;
+    this.languageKey = languageKey;
+    this.kismode = kismode;
     this.generateLink = generateLink;
     this.setup();
 }
 
 NoDataWidget.prototype = {
-    setup: function() {
+    setup: function () {
         this.renderNoDataLead();
         this.renderNoDataCTABlock();
     },
 
-    renderNoDataLead: function(parentNode) {
+    renderNoDataLead: function (parentNode) {
         var leadNode = document.createElement('div');
         leadNode.classList.add('kis-widget__lead');
 
@@ -617,7 +618,7 @@ NoDataWidget.prototype = {
         this.targetDiv.appendChild(leadNode);
     },
 
-    renderNoDataCTABlock: function() {
+    renderNoDataCTABlock: function () {
         var ctaBlockNode = document.createElement('div');
         ctaBlockNode.classList.add('kis-widget__cta-block');
         var headingNode = document.createElement('h3');
@@ -631,7 +632,7 @@ NoDataWidget.prototype = {
         var leadNode3 = document.createElement("span");
         leadNode3.classList.add('kis-widget__cta-lead');
         var lead3 = document.createTextNode(CONTENT.noDataCtaLead3[this.language]);
-        
+
         leadNode1.appendChild(lead1);
         leadNode2.appendChild(lead2);
         leadNode3.appendChild(lead3);
