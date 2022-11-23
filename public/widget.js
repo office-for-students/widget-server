@@ -281,6 +281,7 @@ DataWidget.prototype = {
 
     renderDataLead: function () {
         var leadNode = document.createElement('div');
+        leadNode.classList.add('ofsKisClear');
         leadNode.classList.add('kis-widget__lead');
         if (this.hasOverall) {
             leadNode.appendChild(this.renderSatisfactionSlide());
@@ -298,9 +299,11 @@ DataWidget.prototype = {
 
     createSlideNode: function (idName, statNode, aggregation_level, subject, courseName) {
         var slideNode = document.createElement('div');
+        slideNode.classList.add('ofsKisClear');
         slideNode.classList.add('kis-widget__lead-slide', 'kis-widget__fade');
         slideNode.id = idName;
         var slideSurroundNode = document.createElement('div');
+        slideSurroundNode.classList.add('ofsKisClear');
         slideSurroundNode.classList.add('kis-widget__lead-surround-stat');
         slideNode.appendChild(slideSurroundNode);
 
@@ -312,6 +315,7 @@ DataWidget.prototype = {
 
     createStatNode: function (titleNode, introNode) {
         var statNode = document.createElement('div');
+        statNode.classList.add('ofsKisClear');
         statNode.classList.add('kis-widget__stat');
 
         statNode.appendChild(titleNode);
@@ -321,7 +325,9 @@ DataWidget.prototype = {
     },
 
     createTitleNode: function (titleText) {
-        var titleNode = document.createElement('h1');
+        var titleNode = document.createElement('p');
+        titleNode.setAttribute("role", "Heading");
+        titleNode.classList.add('ofsKisClear');
         titleNode.classList.add('kis-widget__title');
         var title = document.createTextNode(titleText);
         titleNode.appendChild(title);
@@ -329,7 +335,8 @@ DataWidget.prototype = {
     },
 
     createIntroNode: function (introText) {
-        var introNode = document.createElement("h2");
+        var introNode = document.createElement("p");
+        introNode.classList.add('ofsKisClear');
         introNode.classList.add('kis-widget__intro');
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
@@ -413,9 +420,11 @@ DataWidget.prototype = {
 
     renderCourseDetails: function (aggregation_level, subject, courseName) {
         var courseDetailsNode = document.createElement('div');
+        courseDetailsNode.classList.add('ofsKisClear');
         courseDetailsNode.classList.add('kis-widget__course-details');
 
         var courseNode = document.createElement("p");
+        courseNode.classList.add('ofsKisClear');
         courseNode.classList.add('kis-widget__course');
 
 
@@ -467,6 +476,7 @@ DataWidget.prototype = {
         if (aggregation_level == 14 || aggregation_level == 24) {
             if (this.courseData.sandwich_year) {
                 var featuresNode = document.createElement("p");
+                featuresNode.classList.add('ofsKisClear');
                 featuresNode.classList.add('kis-widget__course');
                 var featureList = [this.kismode];
                 var placementYear = this.courseData.sandwich_year.code;
@@ -490,8 +500,10 @@ DataWidget.prototype = {
 
     renderCTABlock: function () {
         var ctaBlockNode = document.createElement('div');
+        // ctaBlockNode.classList.add('ofsKisClear');
         ctaBlockNode.classList.add('kis-widget__cta-block');
-        var headingNode = document.createElement('h3');
+        var headingNode = document.createElement('p');
+        headingNode.classList.add('ofsKisClear');
         headingNode.classList.add('kis-widget__heading');
         var leadNode1 = document.createElement("span");
         // leadNode1.classList.add('cta-lead');
@@ -512,12 +524,15 @@ DataWidget.prototype = {
         ctaBlockNode.appendChild(headingNode);
 
         var logoNode = document.createElement('img');
+        logoNode.classList.add('ofsKisClear');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
         //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
+        ctaWrapperNode.classList.add('ofsKisClear');
+        //this one ^^^
         ctaWrapperNode.classList.add('kis-widget__cta');
 
         var ctaNode = document.createElement('a');
@@ -581,10 +596,13 @@ NoDataWidget.prototype = {
 
     renderNoDataLead: function (parentNode) {
         var leadNode = document.createElement('div');
+        leadNode.classList.add('ofsKisClear');
         leadNode.classList.add('kis-widget__lead');
 
         if (typeof this.courseName[this.languageKey] !== 'undefined' && typeof this.institutionName[this.languageKey] !== 'undefined') {
-            var courseNode = document.createElement("h1");
+            var courseNode = document.createElement("p");
+            courseNode.setAttribute("role", "Heading");
+            courseNode.classList.add('ofsKisClear');
             courseNode.classList.add('kis-widget__intro');
 
             var courseName = this.courseName[this.languageKey];
@@ -595,7 +613,9 @@ NoDataWidget.prototype = {
             courseNode.appendChild(course);
             leadNode.appendChild(courseNode);
         } else {
-            var courseNode = document.createElement("h1");
+            var courseNode = document.createElement("p");
+            courseNode.setAttribute("role", "Heading");
+            courseNode.classList.add('ofsKisClear');
             courseNode.classList.add('kis-widget__intro');
             courseName = this.courseName['english'];
             var at = CONTENT.at['en-gb']
@@ -607,9 +627,11 @@ NoDataWidget.prototype = {
         }
 
         var courseDetailsNode = document.createElement('div');
+        courseDetailsNode.classList.add('ofsKisClear');
         courseDetailsNode.classList.add('kis-widget__course-details');
 
         var introNode = document.createElement("p");
+        introNode.classList.add('ofsKisClear');
         introNode.classList.add('kis-widget__course');
         var intro = document.createTextNode(CONTENT.noDataIntro[this.language]);
         introNode.appendChild(intro);
@@ -620,16 +642,21 @@ NoDataWidget.prototype = {
 
     renderNoDataCTABlock: function () {
         var ctaBlockNode = document.createElement('div');
+        ctaBlockNode.classList.add('ofsKisClear');
         ctaBlockNode.classList.add('kis-widget__cta-block');
-        var headingNode = document.createElement('h3');
+        var headingNode = document.createElement('p');
+        headingNode.classList.add('ofsKisClear');
         headingNode.classList.add('kis-widget__heading');
         var leadNode1 = document.createElement("span");
+        leadNode1.classList.add('ofsKisClear');
         leadNode1.classList.add('kis-widget__cta-lead');
         var lead1 = document.createTextNode(CONTENT.noDataCtaLead1[this.language]);
         var leadNode2 = document.createElement("strong");
+        leadNode2.classList.add('ofsKisClear');
         leadNode2.classList.add('kis-widget__cta-lead');
         var lead2 = document.createTextNode(CONTENT.noDataCtaLead2[this.language]);
         var leadNode3 = document.createElement("span");
+        leadNode3.classList.add('ofsKisClear');
         leadNode3.classList.add('kis-widget__cta-lead');
         var lead3 = document.createTextNode(CONTENT.noDataCtaLead3[this.language]);
 
@@ -643,12 +670,14 @@ NoDataWidget.prototype = {
         ctaBlockNode.appendChild(headingNode);
 
         var logoNode = document.createElement('img');
+        logoNode.classList.add('ofsKisClear');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
         //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
+        ctaWrapperNode.classList.add('ofsKisClear');
         ctaWrapperNode.classList.add('kis-widget__cta');
         var ctaNode = document.createElement('a');
         ctaNode.setAttribute('target', '_blank');
@@ -672,3 +701,4 @@ function init() {
 }
 
 init();
+
