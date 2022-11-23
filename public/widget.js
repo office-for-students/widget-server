@@ -338,6 +338,7 @@ DataWidget.prototype = {
         var introNode = document.createElement("p");
         introNode.classList.add('ofsKisClear');
         introNode.classList.add('kis-widget__intro');
+        introNode.setAttribute("role", "Heading");
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
         return introNode;
