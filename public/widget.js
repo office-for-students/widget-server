@@ -25,7 +25,7 @@ var CONTENT = {
     },
     'logo': {
         'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
-        'cy-gb': '{{domain_name}}/static/images/logos/widget_logo_welsh.svg'
+        'cy-gb': 'https://discoveruni.gov.uk/static/images/logos/widget_logo_welsh.svg'
     },
     'logoAlt': {
         'en-gb': 'DiscoverUni',
@@ -245,6 +245,7 @@ DiscoverUniWidget.prototype = {
 
     generateLink: function () {
         var base_domain = '{{domain_name}}';
+        console.log(base_domain)
         if (this.languageKey === 'welsh') {
             base_domain += '/cy';
         }
@@ -528,12 +529,11 @@ DataWidget.prototype = {
         logoNode.classList.add('ofsKisClear');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
-        //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
+        logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
         ctaWrapperNode.classList.add('ofsKisClear');
-        //this one ^^^
         ctaWrapperNode.classList.add('kis-widget__cta');
 
         var ctaNode = document.createElement('a');
@@ -674,7 +674,7 @@ NoDataWidget.prototype = {
         logoNode.classList.add('ofsKisClear');
         logoNode.classList.add('kis-widget__logo');
         logoNode.setAttribute('src', CONTENT.logo[this.language]);
-        //logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
+        logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
         var ctaWrapperNode = document.createElement('div');
