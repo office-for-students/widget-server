@@ -172,7 +172,7 @@
 
 .kis-widget.horizontal {
     width: 615px;
-    height: 150px;
+    height: 142px;
 }
 
 .kis-widget.vertical.responsive, .kis-widget.horizontal.responsive {
@@ -219,7 +219,7 @@
 
 .kis-widget.horizontal .kis-widget__lead .kis-widget__intro {
     margin-left: 10px;
-    margin-bottom: 6px;
+    /*margin-bottom: 6px;*/
     font-weight: bold;
     background-color: white;
 }
