@@ -315,15 +315,12 @@ DataWidget.prototype = {
     },
 
     createStatNode: function (titleNode, introNode) {
-        var statNode = document.createElement('div');
-        var paragraphNode = document.createElement('p');
+        var statNode = document.createElement('p');
         statNode.classList.add('ofsKisClear');
         statNode.classList.add('kis-widget__stat');
-        paragraphNode.style.margin = 0;
-
-        paragraphNode.appendChild(titleNode);
-        paragraphNode.appendChild(introNode);
-        statNode.appendChild(paragraphNode);
+        statNode.style.margin = "0";
+        statNode.appendChild(titleNode);
+        statNode.appendChild(introNode);
 
         return statNode;
     },
