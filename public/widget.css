@@ -61,7 +61,7 @@
 .kis-widget .kis-widget__lead {
     font-family: Nunito Sans;
     background-color: white;
-    color: #308282;
+    color: #307e7e;
 
 }
 
@@ -108,7 +108,7 @@
 .kis-widget .kis-widget__cta-block .kis-widget__cta {
     background-color: white;
     border-radius: 60px;
-    color: #308282;
+    color: #307e7e;
     font-size: 0.95rem;
     line-height: 1.2rem;
     text-align: center;
@@ -130,7 +130,7 @@
 }
 
 .kis-widget .kis-widget__cta-block .kis-widget__cta a {
-    color: #308282;
+    color: #307e7e;
     text-decoration: none;
     font-family: Nunito Sans;
 }
@@ -142,7 +142,7 @@
 }
 
 .kis-widget .kis-widget__lead .kis-widget__title {
-    color: #308282;
+    color: #307e7e;
     font-size: 3rem !important;
     font-weight: normal;
     line-height: 3.5rem;
@@ -183,7 +183,7 @@
 
 .kis-widget.horizontal.responsive .kis-widget__lead .kis-widget__stat {
     align-items: flex-start;
-    color: #308282;
+    color: #307e7e;
 }
 
 .kis-widget .kis-widget__lead {
@@ -209,7 +209,7 @@
 .kis-widget.horizontal .kis-widget__lead .kis-widget__stat {
     display: flex;
     align-items: flex-end;
-    color: #308282;
+    color: #307e7e;
 }
 
 .kis-widget.horizontal .kis-widget__lead .kis-widget__course-details {
