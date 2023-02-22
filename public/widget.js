@@ -316,18 +316,20 @@ DataWidget.prototype = {
 
     createStatNode: function (titleNode, introNode) {
         var statNode = document.createElement('div');
+        var paragraphNode = document.createElement('p');
         statNode.classList.add('ofsKisClear');
         statNode.classList.add('kis-widget__stat');
+        paragraphNode.style.margin = 0;
 
-        statNode.appendChild(titleNode);
-        statNode.appendChild(introNode);
+        paragraphNode.appendChild(titleNode);
+        paragraphNode.appendChild(introNode);
+        statNode.appendChild(paragraphNode);
 
         return statNode;
     },
 
     createTitleNode: function (titleText) {
-        var titleNode = document.createElement('p');
-        titleNode.setAttribute("aria-level", "2");
+        var titleNode = document.createElement('span');
         titleNode.classList.add('ofsKisClear');
         titleNode.classList.add('kis-widget__title');
         var title = document.createTextNode(titleText);
@@ -336,10 +338,9 @@ DataWidget.prototype = {
     },
 
     createIntroNode: function (introText) {
-        var introNode = document.createElement("p");
+        var introNode = document.createElement("span");
         introNode.classList.add('ofsKisClear');
         introNode.classList.add('kis-widget__intro');
-        introNode.setAttribute("aria-level", "2");
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
         return introNode;
@@ -602,7 +603,6 @@ NoDataWidget.prototype = {
 
         if (typeof this.courseName[this.languageKey] !== 'undefined' && typeof this.institutionName[this.languageKey] !== 'undefined') {
             var courseNode = document.createElement("p");
-            courseNode.setAttribute("aria-level", "2");
             courseNode.classList.add('ofsKisClear');
             courseNode.classList.add('kis-widget__intro');
 
@@ -615,7 +615,6 @@ NoDataWidget.prototype = {
             leadNode.appendChild(courseNode);
         } else {
             var courseNode = document.createElement("p");
-            courseNode.setAttribute("aria-level", "2");
             courseNode.classList.add('ofsKisClear');
             courseNode.classList.add('kis-widget__intro');
             courseName = this.courseName['english'];
