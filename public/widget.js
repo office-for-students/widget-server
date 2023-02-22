@@ -327,7 +327,6 @@ DataWidget.prototype = {
 
     createTitleNode: function (titleText) {
         var titleNode = document.createElement('p');
-        titleNode.setAttribute("role", "Heading");
         titleNode.setAttribute("aria-level", "2");
         titleNode.classList.add('ofsKisClear');
         titleNode.classList.add('kis-widget__title');
@@ -340,7 +339,6 @@ DataWidget.prototype = {
         var introNode = document.createElement("p");
         introNode.classList.add('ofsKisClear');
         introNode.classList.add('kis-widget__intro');
-        introNode.setAttribute("role", "Heading");
         introNode.setAttribute("aria-level", "2");
         var intro = document.createTextNode(introText);
         introNode.appendChild(intro);
@@ -604,7 +602,6 @@ NoDataWidget.prototype = {
 
         if (typeof this.courseName[this.languageKey] !== 'undefined' && typeof this.institutionName[this.languageKey] !== 'undefined') {
             var courseNode = document.createElement("p");
-            courseNode.setAttribute("role", "Heading");
             courseNode.setAttribute("aria-level", "2");
             courseNode.classList.add('ofsKisClear');
             courseNode.classList.add('kis-widget__intro');
@@ -618,7 +615,6 @@ NoDataWidget.prototype = {
             leadNode.appendChild(courseNode);
         } else {
             var courseNode = document.createElement("p");
-            courseNode.setAttribute("role", "Heading");
             courseNode.setAttribute("aria-level", "2");
             courseNode.classList.add('ofsKisClear');
             courseNode.classList.add('kis-widget__intro');
