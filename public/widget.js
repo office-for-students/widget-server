@@ -209,7 +209,7 @@ DiscoverUniWidget.prototype = {
     renderWidget: function (status, response) {
         if (status === 200) {
             var courseData = JSON.parse(response);
-            if (this.hasRequiredStats(courseData)) {
+            if (this.hasRequiredStats(courseData) && courseData["multiple_subjects"] === false) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,
                     this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
                     this.generateLink.bind(this));
