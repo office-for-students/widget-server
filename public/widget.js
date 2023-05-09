@@ -243,15 +243,14 @@ DiscoverUniWidget.prototype = {
             Boolean(this.hasOverallSatisfactionStats || this.hasTeachingSatisfactionStats || this.hasWorkStats));
     },
 
-    generateLink: function () {
+    generateLink: function (courseData) {
         var base_domain = '{{domain_name}}';
-        console.log(base_domain)
         if (this.languageKey === 'welsh') {
             base_domain += '/cy';
         }
         coursePageBase = '{{base_domain}}/course-details/{{uni_id}}/{{course_id}}/{{mode}}/';
         coursePage = coursePageBase.replace('{{base_domain}}', base_domain);
-        coursePage = coursePage.replace('{{uni_id}}', this.institution);
+        coursePage = coursePage.replace('{{uni_id}}', courseData.pub_ukprn);
         coursePage = coursePage.replace('{{course_id}}', this.course);
         coursePage = coursePage.replace('{{mode}}', this.kismode);
         return coursePage;
@@ -535,7 +534,7 @@ DataWidget.prototype = {
         ctaWrapperNode.classList.add('kis-widget__cta');
 
         var ctaNode = document.createElement('a');
-        ctaNode.href = this.generateLink();
+        ctaNode.href = this.generateLink(this.courseData);
         ctaNode.setAttribute('target', '_blank');
         var cta = document.createTextNode(CONTENT.cta[this.language]);
 
@@ -678,7 +677,7 @@ NoDataWidget.prototype = {
         ctaWrapperNode.classList.add('kis-widget__cta');
         var ctaNode = document.createElement('a');
         ctaNode.setAttribute('target', '_blank');
-        ctaNode.href = this.generateLink();
+        ctaNode.href = this.generateLink(this.courseData);
 
         var cta = document.createTextNode(CONTENT.noDataCta[this.language]);
         ctaNode.appendChild(cta);
