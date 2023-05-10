@@ -209,13 +209,14 @@ DiscoverUniWidget.prototype = {
     renderWidget: function (status, response) {
         if (status === 200) {
             var courseData = JSON.parse(response);
+            let link = this.generateLink(courseData)
             if (this.hasRequiredStats(courseData) && courseData["multiple_subjects"] === false) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,
                     this.hasOverallSatisfactionStats, this.hasTeachingSatisfactionStats, this.hasWorkStats,
-                    this.generateLink.bind(this));
+                    link);
             } else {
                 new NoDataWidget(this.targetDiv, courseData.course_name, courseData.institution_name, this.language,
-                    this.languageKey, this.kismode, this.generateLink.bind(this));
+                    this.languageKey, this.kismode, link);
             }
         } else {
             new NoDataWidget(this.targetDiv, "", "", this.language, this.languageKey, this.kismode,
@@ -248,8 +249,8 @@ DiscoverUniWidget.prototype = {
         if (this.languageKey === 'welsh') {
             base_domain += '/cy';
         }
-        coursePageBase = '{{base_domain}}/course-details/{{uni_id}}/{{course_id}}/{{mode}}/';
-        coursePage = coursePageBase.replace('{{base_domain}}', base_domain);
+        let coursePageBase = '{{base_domain}}/course-details/{{uni_id}}/{{course_id}}/{{mode}}/';
+        let coursePage = coursePageBase.replace('{{base_domain}}', base_domain);
         coursePage = coursePage.replace('{{uni_id}}', courseData.pub_ukprn);
         coursePage = coursePage.replace('{{course_id}}', this.course);
         coursePage = coursePage.replace('{{mode}}', this.kismode);
@@ -677,7 +678,7 @@ NoDataWidget.prototype = {
         ctaWrapperNode.classList.add('kis-widget__cta');
         var ctaNode = document.createElement('a');
         ctaNode.setAttribute('target', '_blank');
-        ctaNode.href = this.generateLink(this.courseData);
+        ctaNode.href = this.generateLink;
 
         var cta = document.createTextNode(CONTENT.noDataCta[this.language]);
         ctaNode.appendChild(cta);
