@@ -286,28 +286,19 @@
 
 /* For a responsive and/or vertical widget */
 .kis-widget.responsive.vertical .kis-widget__lead, .kis-widget.vertical .kis-widget__lead {
-    border-top: 2px solid #4EA27D;
-    border-left: 2px solid #4EA27D;
-    border-right: 2px solid #4EA27D;
-
+    border: 2px solid #4EA27D;
 }
 
 
 .kis-widget.responsive.vertical .kis-widget__cta-block, .kis-widget.vertical .kis-widget__cta-block {
-    border-bottom: 2px solid #4EA27D;
-    border-left: 2px solid #4EA27D;
-    border-right: 2px solid #4EA27D;
+    border: 2px solid #4EA27D;
 }
 
 /* For a responsive and/or horizontal widget */
 .kis-widget.responsive.horizontal .kis-widget__lead, .kis-widget.horizontal .kis-widget__lead {
-    border-top: 2px solid #4EA27D;
-    border-left: 2px solid #4EA27D;
-    border-bottom: 2px solid #4EA27D;
+    border: 2px solid #4EA27D;
 }
 
 .kis-widget.responsive.horizontal .kis-widget__cta-block, .kis-widget.horizontal .kis-widget__cta-block {
-    border-bottom: 2px solid #4EA27D;
-    border-top: 2px solid #4EA27D;
-    border-right: 2px solid #4EA27D;
+    border: 2px solid #4EA27D;
 }
