@@ -116,6 +116,8 @@ var MODE_KEYS = {
     'parttime': 'PartTime',
 }
 
+const BASE_URL = "https://www.discoveruni.gov.uk/"
+
 var LANGUAGE_KEYS = {
     'en-gb': 'english',
     'cy-gb': 'welsh'
@@ -220,7 +222,7 @@ DiscoverUniWidget.prototype = {
             }
         } else {
             new NoDataWidget(this.targetDiv, "", "", this.language, this.languageKey, this.kismode,
-                this.generateLink.bind(this));
+                BASE_URL);
         }
     },
 
