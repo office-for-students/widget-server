@@ -116,7 +116,7 @@ var MODE_KEYS = {
     'parttime': 'PartTime',
 }
 
-const BASE_URL = "https://www.discoveruni.gov.uk/"
+const BASE_URL = "https://www.discoveruni.gov.uk"
 
 var LANGUAGE_KEYS = {
     'en-gb': 'english',
@@ -247,16 +247,12 @@ DiscoverUniWidget.prototype = {
     },
 
     generateLink: function (courseData) {
-        var base_domain = '{{domain_name}}';
+        let base_domain = BASE_URL;
         if (this.languageKey === 'welsh') {
             base_domain += '/cy';
         }
-        let coursePageBase = '{{base_domain}}/course-details/{{uni_id}}/{{course_id}}/{{mode}}/';
-        let coursePage = coursePageBase.replace('{{base_domain}}', base_domain);
-        coursePage = coursePage.replace('{{uni_id}}', courseData.pub_ukprn);
-        coursePage = coursePage.replace('{{course_id}}', this.course);
-        coursePage = coursePage.replace('{{mode}}', this.kismode);
-        return coursePage;
+
+        return `${base_domain}/course-details/${courseData.pub_ukprn}/${this.course}/${this.kismode}/`;
     }
 }
 
@@ -537,7 +533,7 @@ DataWidget.prototype = {
         ctaWrapperNode.classList.add('kis-widget__cta');
 
         var ctaNode = document.createElement('a');
-        ctaNode.href = this.generateLink(this.courseData);
+        ctaNode.href = this.generateLink;
         ctaNode.setAttribute('target', '_blank');
         var cta = document.createTextNode(CONTENT.cta[this.language]);
 
