@@ -9,11 +9,11 @@ var CONTENT = {
     },
     'question_23': {
         'en-gb': "say staff value students views and opinions about the course",
-        'cy-gb': "TBC."
+        'cy-gb': "yn dweud bod staff yn gwerthfawrogi sylwadau a barn myfyrwyr am y cwrs",
     },
     'explanationIntro': {
         'en-gb': 'of students say teaching staff have supported their learning well.',
-        'cy-gb': 'TBC.'
+        'cy-gb': "o fyfyrwyr yn dweud bod staff addysgu wedi cefnogi eu dysgu yn dda."
     },
     'workIntro': {
         'en-gb': 'in work or doing further study 15 months after the course.',
