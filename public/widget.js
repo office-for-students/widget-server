@@ -1,4 +1,8 @@
 var CONTENT = {
+    'open_in_new_window':{
+        'en-gb': 'link opens in new tab',
+        'cy-gb': "dolen yn agor mewn tab newydd"
+    },
     'satisfactionIntro': {
         'en-gb': 'of students were satisfied overall with their course.',
         'cy-gb': "cyfran y myfyrwyr a oedd yn fodlon â'u cwrs ar y cyfan."
@@ -120,7 +124,7 @@ var MODE_KEYS = {
     'parttime': 'PartTime',
 }
 
-const BASE_URL = "https://www.discoveruni.gov.uk/"
+const BASE_URL = "https://www.discoveruni.gov.uk"
 
 var LANGUAGE_KEYS = {
     'en-gb': 'english',
@@ -183,7 +187,7 @@ DiscoverUniWidget.prototype = {
         logoFontNode.rel = "stylesheet";
         logoFontNode.type = "text/css";
         var generalFontNode = document.createElement('link');
-        generalFontNode.href = "https://fonts.googleapis.com/css?family=Nunito+Sans:regular,bold&display=swap";
+        generalFontNode.href = "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;600;800&display=swap";
         generalFontNode.rel = "stylesheet";
         generalFontNode.type = "text/css";
         styling = "{{styles}}";
@@ -251,16 +255,12 @@ DiscoverUniWidget.prototype = {
     },
 
     generateLink: function (courseData) {
-        var base_domain = '{{domain_name}}';
+        let base_domain = BASE_URL;
         if (this.languageKey === 'welsh') {
             base_domain += '/cy';
         }
-        let coursePageBase = '{{base_domain}}/course-details/{{uni_id}}/{{course_id}}/{{mode}}/';
-        let coursePage = coursePageBase.replace('{{base_domain}}', base_domain);
-        coursePage = coursePage.replace('{{uni_id}}', courseData.pub_ukprn);
-        coursePage = coursePage.replace('{{course_id}}', this.course);
-        coursePage = coursePage.replace('{{mode}}', this.kismode);
-        return coursePage;
+
+        return `${base_domain}/course-details/${courseData.pub_ukprn}/${this.course}/${this.kismode}/`;
     }
 }
 
@@ -548,19 +548,23 @@ DataWidget.prototype = {
         logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
-        var ctaWrapperNode = document.createElement('div');
+        var ctaWrapperNode = document.createElement('a');
+        var span = document.createElement('span')
+        var newWindowText = document.createTextNode(CONTENT.open_in_new_window[this.language])
+        span.appendChild(newWindowText)
+
+        ctaWrapperNode.href = this.generateLink;
+        ctaWrapperNode.setAttribute('target', '_blank');
         ctaWrapperNode.classList.add('ofsKisClear');
         ctaWrapperNode.classList.add('kis-widget__cta');
-
-        var ctaNode = document.createElement('a');
-        ctaNode.href = this.generateLink(this.courseData);
-        ctaNode.setAttribute('target', '_blank');
+        ctaWrapperNode.classList.add('kis_button')
+        var ctaNode = document.createElement('p');
         var cta = document.createTextNode(CONTENT.cta[this.language]);
-
         ctaWrapperNode.appendChild(ctaNode);
         ctaNode.appendChild(cta);
         ctaBlockNode.appendChild(ctaWrapperNode);
         ctaBlockNode.ariaLabel = `${leadNode1.innerHTML} ${leadNode2.innerHTML} ${leadNode3.innerHTML}`;
+        ctaWrapperNode.appendChild(span)
 
         this.targetDiv.appendChild(ctaBlockNode);
 
@@ -691,16 +695,22 @@ NoDataWidget.prototype = {
         logoNode.setAttribute('alt', CONTENT.logoAlt[this.language]);
         ctaBlockNode.appendChild(logoNode);
 
-        var ctaWrapperNode = document.createElement('div');
+
+        var ctaWrapperNode = document.createElement('a');
+        ctaWrapperNode.href = this.generateLink;
+        ctaWrapperNode.setAttribute('target', '_blank');
         ctaWrapperNode.classList.add('ofsKisClear');
         ctaWrapperNode.classList.add('kis-widget__cta');
-        var ctaNode = document.createElement('a');
-        ctaNode.setAttribute('target', '_blank');
-        ctaNode.href = this.generateLink;
+        ctaWrapperNode.classList.add('kis_button')
+        var span = document.createElement('span')
+        var newWindowText = document.createTextNode(CONTENT.open_in_new_window[this.language])
+        span.appendChild(newWindowText)
 
+        var ctaNode = document.createElement('p');
         var cta = document.createTextNode(CONTENT.noDataCta[this.language]);
         ctaNode.appendChild(cta);
         ctaWrapperNode.appendChild(ctaNode);
+        ctaWrapperNode.appendChild(span)
         ctaBlockNode.appendChild(ctaWrapperNode);
 
         this.targetDiv.appendChild(ctaBlockNode);
