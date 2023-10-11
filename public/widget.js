@@ -369,7 +369,7 @@ DataWidget.prototype = {
         }
         let percentage
         let introText
-        if (nssData.question_28.agree_or_strongly_agree){
+        if (nssData.question_28 && typeof nssData.question_28 !== undefined){
             percentage = nssData.question_28.agree_or_strongly_agree + '%';
             aggregation_level = nssData.nss_country_aggregation_level
             introText = CONTENT.satisfactionIntro[this.language];
