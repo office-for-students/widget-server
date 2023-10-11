@@ -7,9 +7,13 @@ var CONTENT = {
         'en-gb': 'of students were satisfied overall with their course.',
         'cy-gb': "cyfran y myfyrwyr a oedd yn fodlon â'u cwrs ar y cyfan."
     },
+    'question_23': {
+        'en-gb': "say staff value students views and opinions about the course",
+        'cy-gb': "yn dweud bod staff yn gwerthfawrogi sylwadau a barn myfyrwyr am y cwrs",
+    },
     'explanationIntro': {
-        'en-gb': 'of students agreed staff were good at explaining things.',
-        'cy-gb': 'cyfran y myfyrwyr sydd yn cytuno bod staff yn dda am esbonio pethau.'
+        'en-gb': 'of students say teaching staff have supported their learning well.',
+        'cy-gb': "o fyfyrwyr yn dweud bod staff addysgu wedi cefnogi eu dysgu yn dda."
     },
     'workIntro': {
         'en-gb': 'in work or doing further study 15 months after the course.',
@@ -346,26 +350,38 @@ DataWidget.prototype = {
     },
 
     renderSatisfactionSlide: function () {
-        var aggregation_level = this.courseData.statistics.nss[0].aggregation_level;
-        var courseName = this.courseData.course_name[this.languageKey];
+        const nssData = this.courseData.statistics.nss[0]
+        let aggregation_level = nssData.aggregation_level;
+        let courseName = this.courseData.course_name[this.languageKey];
         if (typeof courseName === 'undefined') {
             courseName = this.courseData.course_name['english'];
         }
-        if (aggregation_level == 11 || aggregation_level == 12 || aggregation_level == 13 || aggregation_level == 21 || aggregation_level == 22 || aggregation_level == 23) {
-            if (this.language == "cy-gb") {
-                var subject = this.courseData.statistics.nss[0].subject.welsh_label;
+        const aggregation_lookup = [11, 12, 13, 21, 22, 23]
+        let subject
+        if (aggregation_lookup.includes(aggregation_level)) {
+            if (this.language === "cy-gb") {
+                subject = nssData.subject.welsh_label;
             } else {
-                var subject = this.courseData.statistics.nss[0].subject.english_label;
+                subject = nssData.subject.english_label;
             }
         } else {
-            var subject = courseName;
+            subject = courseName;
         }
-        var percentage = this.courseData.statistics.nss[0].question_27.agree_or_strongly_agree + '%';
-        var introText = CONTENT.satisfactionIntro[this.language];
+        let percentage
+        let introText
+        if (nssData.question_28.agree_or_strongly_agree){
+            percentage = nssData.question_28.agree_or_strongly_agree + '%';
+            aggregation_level = nssData.nss_country_aggregation_level
+            introText = CONTENT.satisfactionIntro[this.language];
+        }
+        else {
+            percentage = nssData.question_23.agree_or_strongly_agree + '%';
+            introText = CONTENT.question_23[this.language];
+        }
 
-        var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
+        let statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
 
-        var slideNode = this.createSlideNode('satisfaction', statNode, aggregation_level, subject, courseName);
+        let slideNode = this.createSlideNode('satisfaction', statNode, aggregation_level, subject, courseName);
         slideNode.ariaLabel = `${percentage} ${introText}`
         return slideNode;
     },
