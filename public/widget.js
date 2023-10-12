@@ -235,11 +235,29 @@ DiscoverUniWidget.prototype = {
     },
 
     setOverallSatisfactionStats: function (nssStats) {
-        this.hasOverallSatisfactionStats = Boolean(nssStats && nssStats[0] && nssStats[0].question_1);
+        let question = false;
+        if (nssStats[0].question_23) {
+            if ('agree_or_strongly_agree' in nssStats[0].question_23) {
+                question = nssStats[0].question_23
+            }
+        }
+        if (nssStats[0].question_28) {
+            if ('agree_or_strongly_agree' in nssStats[0].question_28) {
+                question = nssStats[0].question_28
+            }
+        }
+
+        this.hasOverallSatisfactionStats = Boolean(nssStats && nssStats[0] && question);
     },
 
     setTeachingSatisfactionStats: function (nssStats) {
-        this.hasTeachingSatisfactionStats = Boolean(nssStats && nssStats[0] && nssStats[0].question_27);
+        let question = false;
+        if (nssStats[0].question_16) {
+            if ('agree_or_strongly_agree' in nssStats[0].question_16) {
+                question = nssStats[0].question_16
+            }
+        }
+        this.hasTeachingSatisfactionStats = Boolean(nssStats && nssStats[0] && question);
     },
 
     setWorkStats: function (workStats) {
@@ -369,14 +387,17 @@ DataWidget.prototype = {
         }
         let percentage
         let introText
-        if (nssData.question_28 && typeof nssData.question_28 !== undefined){
-            percentage = nssData.question_28.agree_or_strongly_agree + '%';
-            aggregation_level = nssData.nss_country_aggregation_level
-            introText = CONTENT.satisfactionIntro[this.language];
-        }
-        else {
+
+        // England
+        if (this.courseData.country.code == 'XF') {
             percentage = nssData.question_23.agree_or_strongly_agree + '%';
             introText = CONTENT.question_23[this.language];
+        }
+        // Not England
+        else {
+            percentage = nssData.question_28.agree_or_strongly_agree + '%';
+            introText = CONTENT.satisfactionIntro[this.language];
+            aggregation_level = nssData.nss_country_aggregation_level
         }
 
         let statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
@@ -401,7 +422,7 @@ DataWidget.prototype = {
         } else {
             var subject = courseName;
         }
-        var percentage = this.courseData.statistics.nss[0].question_1.agree_or_strongly_agree + '%';
+        var percentage = this.courseData.statistics.nss[0].question_16.agree_or_strongly_agree + '%';
         var introText = CONTENT.explanationIntro[this.language];
 
         var statNode = this.createStatNode(this.createTitleNode(percentage), this.createIntroNode(introText));
