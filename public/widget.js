@@ -1,5 +1,5 @@
 var CONTENT = {
-    'open_in_new_window':{
+    'open_in_new_window': {
         'en-gb': 'link opens in new tab',
         'cy-gb': "dolen yn agor mewn tab newydd"
     },
@@ -607,15 +607,17 @@ DataWidget.prototype = {
         slides[this.slideIndex].style.display = "block"
         clearTimeout(this.timeout);
         this.timeout = setTimeout(this.carousel.bind(this), 5000); // Change image every 5 seconds
-        let allSlides = document.getElementById("kis-widget_1");
+        let allSlides = document.querySelectorAll(`[id^="kis-widget_"]`);
 
-        allSlides.addEventListener("mouseenter", () => {
-            clearTimeout(this.timeout);
-        })
-        allSlides.addEventListener("mouseleave", () => {
-            clearTimeout(this.timeout);
-            this.timeout = setTimeout(this.carousel.bind(this), 5000);
-        })
+        for (let slide of allSlides) {
+            slide.addEventListener("mouseenter", () => {
+                clearTimeout(this.timeout);
+            })
+            slide.addEventListener("mouseleave", () => {
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(this.carousel.bind(this), 5000);
+            })
+        }
     }
 }
 
