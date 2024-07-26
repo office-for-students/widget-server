@@ -33,7 +33,7 @@ var CONTENT = {
     },
     'logo': {
         'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
-        'cy-gb': 'https://discoveruni.gov.uk/static/images/logos/widget_logo_welsh.svg'
+        'cy-gb': '{{domain_name}}/static/images/logos/widget_logo_welsh.svg'
     },
     'logoAlt': {
         'en-gb': 'DiscoverUni',
