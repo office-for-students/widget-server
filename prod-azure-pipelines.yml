@@ -11,8 +11,14 @@ pool:
 variables:
   imageName: 'discover-uni-widget:$(Build.BuildId)'
   dockerId: proddiscoverunicontainerregistry
+  nodeVersion: '20.x'
 
 steps:
+  - task: UseNode@1
+    inputs:
+      version: '$(nodeVersion)'
+    displayName: 'Use Node.js $(nodeVersion)'
+
   - script: |
       sed -i 's|{{domain_name}}|'$domainName'|g' ./public/widget.js
       sed -i 's|{{api_domain}}|'$apiHost'|g' ./public/widget.js
