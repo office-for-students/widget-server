@@ -7,9 +7,9 @@ COPY package*.json ./
 RUN npm install && npm install
 
 # installs nvm (Node Version Manager)
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && RUN nvm install 20
 # download and install Node.js (you may need to restart the terminal)
-RUN nvm install 20
+
 #RUN npm ci --only=production
 
 COPY . .
