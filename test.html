@@ -1,5 +1,7 @@
 <!doctype html>
-
+<script>
+    urlToTestAgainst = 'https://pre-prod-widget-discover-uni.azurewebsites.net/';
+</script>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8" />
@@ -47,7 +49,7 @@
 
     <h3>Responsive iframe test</h3>
     <iframe id="unistats-widget-frame" title="Unistats KIS Widget"
-    src="http://localhost:8001/widget/10007791/10882/horizontal/small/en-GB/FullTime"
+    src="https://pre-prod-widget-discover-uni.azurewebsites.net/widget/10007791/10882/horizontal/small/en-GB/FullTime"
     scrolling="no" style="overflow: hidden; border: 0px none transparent; min-width: 194px; min-height: 155px; width:100%;"></iframe>
 
 <!--    <h3>Fixed vertical iframe test</h3>-->
@@ -65,7 +67,7 @@
             "use strict";
             var widgetScript = d.createElement('script');
             widgetScript.id = 'unistats-widget-script';
-            widgetScript.src = 'http://localhost:8001/widget/embed-script';
+            widgetScript.src = `${urlToTestAgainst}widget/embed-script`;
             var scriptTags = d.getElementsByTagName('script')[0];
             if (d.getElementById('unistats-widget-script')) { return; }
             scriptTags.parentNode.insertBefore(widgetScript, scriptTags);
