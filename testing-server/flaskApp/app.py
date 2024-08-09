@@ -4,7 +4,7 @@ from flask import render_template
 from decouple import config
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/')
 def hello_world():  # put application's code here
