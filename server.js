@@ -109,7 +109,8 @@ app.get('/Widget/embed-script', (req, res) => {
     res.sendFile('public/widget.js', {
         root: __dirname,
         headers: {
-            'Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Origin': "*",
         }
     });
 });
@@ -119,7 +120,8 @@ app.get('/Widget/embed-script.js', (req, res) => {
     res.sendFile('public/widget.js', {
         root: __dirname,
         headers: {
-            'Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Origin': "*",
         }
     });
 });

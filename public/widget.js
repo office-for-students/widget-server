@@ -33,7 +33,7 @@ var CONTENT = {
     },
     'logo': {
         'en-gb': '{{domain_name}}/static/images/logos/widget_logo_english.svg',
-        'cy-gb': 'https://discoveruni.gov.uk/static/images/logos/widget_logo_welsh.svg'
+        'cy-gb': '{{domain_name}}/static/images/logos/widget_logo_welsh.svg'
     },
     'logoAlt': {
         'en-gb': 'DiscoverUni',
@@ -218,7 +218,7 @@ DiscoverUniWidget.prototype = {
 
     renderWidget: function (status, response) {
         if (status === 200) {
-            var courseData = JSON.parse(response);
+            var courseData = JSON.parse(response).data;
             let link = this.generateLink(courseData)
             if (this.hasRequiredStats(courseData) && courseData["multiple_subjects"] === false) {
                 new DataWidget(this.targetDiv, courseData, this.language, this.languageKey, this.kismode,
@@ -265,6 +265,7 @@ DiscoverUniWidget.prototype = {
     },
 
     hasRequiredStats: function (courseData) {
+
         this.setOverallSatisfactionStats(courseData.statistics.nss)
         this.setTeachingSatisfactionStats(courseData.statistics.nss)
         this.setWorkStats(courseData.statistics.employment)
@@ -285,7 +286,7 @@ DiscoverUniWidget.prototype = {
 var DataWidget = function (targetDiv, courseData, language, languageKey, kismode, hasOverall, hasTeaching, hasWork,
                            generateLink) {
     this.targetDiv = targetDiv;
-    this.courseData = courseData
+    this.courseData = courseData;
     this.language = language;
     this.languageKey = languageKey;
     this.kismode = kismode;

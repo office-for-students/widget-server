@@ -1,2 +1,15 @@
 node_modules
 npm-debug.log
+docker-compose.builder.yml
+dock-compose.yml
+dev-azure-pipelines.yml
+dev-docker-compose.yml
+dev-docker-compose.builder.yml
+CONTRIBUTING.md
+.github
+prod-azure-pipelines.yml
+prod-docker-compose.yml
+pre-prod-azure-pipelines.yml
+docker-compose.yml.example
+testing-server
+```
