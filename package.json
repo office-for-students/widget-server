@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "compression": "1.7.4",
-    "docker": "^0.2.14",
+    "docker": "^1.0.0",
     "docker-compose": "^0.24.8",
     "express": "^4.19.2",
     "hbs": "4.2.0",
