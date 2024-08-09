@@ -9,7 +9,7 @@ app = Flask(__name__)
 def hello_world():  # put application's code here
     return render_template(
         'index.html',
-        url_to_test=config("WIDGET_SERVER_URL", default="http://0.0.0.0:8001/")
+        url_to_test=config("WIDGET_SERVER_URL", default="prod-widget-discover-uni.azurewebsites.net/")
     )
 
 
