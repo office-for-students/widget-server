@@ -6,6 +6,13 @@ from decouple import config
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
+@app.after_request
+def add_custom_headers(response):
+    response.headers['X-Frame-Options'] = '*'
+    response.headers['X-Another-Header'] = 'Another header value'
+    return response
+
+
 @app.route('/')
 def hello_world():  # put application's code here
     return render_template(
