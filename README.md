@@ -27,6 +27,10 @@ HTTP/1.1 200 OK
 ...
 ```
 
-# Loading an example widget
+# Testing the widget
 
-Drag'n'drop `test.html` into your browser. It should load up a test widget.
+There is a test server located in an internal repository. To test the widget, you will need to clone the repository and follow the instructions in the README.
+
+The test server repository is named: `ofs-flask-widget-server-testing-app` and the README can be found in the root of this repository.
+
+
