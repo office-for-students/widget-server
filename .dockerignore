@@ -11,3 +11,5 @@ prod-azure-pipelines.yml
 prod-docker-compose.yml
 pre-prod-azure-pipelines.yml
 docker-compose.yml.example
+testing-server
+```
