@@ -318,7 +318,7 @@ a.kis_button:hover span, a.kis_button:focus span, a.kis_button:active span {
     text-align: center
 }
 
-:focus {
+.kis-widget:focus {
     outline: 0;
 }
 
